@@ -13,7 +13,6 @@ export default function NavBar({ toggleSideNavDisplay }: NavBarProps) {
 	useEffect(() => {
 		setIsUserLoggedIn(user.isLogin);
 	}, []);
-	console.log('user: ', user);
 	return (
 		<Flex
 			w={'100%'}

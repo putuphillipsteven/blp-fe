@@ -68,14 +68,12 @@ interface LoginAuthReducerProps {
 export const login = ({ email, password }: LoginAuthReducerProps) => {
 	return async (dispatch: AppDispatch) => {
 		try {
-			console.log(`LOGIN JALAN | ${import.meta.env.VITE_APP_API_URL}`);
 			const res = await axios.post(`${import.meta.env.VITE_APP_API_URL}/auth/login`, {
 				email,
 				password,
 			});
-			localStorage.setItem('token', res?.data?.data?.token);
-			// console.log(res.data?.data?.token);
-			// console.log(res.data?.data);
+			const TOKEN = res.data?.data?.token;
+			localStorage.setItem('token', TOKEN);
 			dispatch(setUser(res?.data?.data?.user));
 			dispatch(loginSuccess());
 		} catch (error) {
@@ -88,9 +86,9 @@ export const keepLogin = () => {
 	return async (dispatch: AppDispatch) => {
 		try {
 			const token = localStorage.getItem('token');
-			
+
 			if (token) {
-				const res = await axios.get(`${import.meta.env.VITE_API_URL}auth/keep-login`, {
+				const res = await axios.get(`${import.meta.env.VITE_API_URL}/auth/keep-login`, {
 					headers: {
 						Authorization: `Bearer ${token}`,
 					},
@@ -100,7 +98,7 @@ export const keepLogin = () => {
 				dispatch(keepLoginSuccess());
 			}
 		} catch (error) {
-			localStorage.removeItem('token');
+			// localStorage.removeItem('token');
 			throw error;
 		}
 	};
