@@ -72,10 +72,10 @@ export default function SignInModal({ setIsUserLoggedIn }: SignInModalProps) {
 				});
 
 				if (role_id === 3) {
-					navigate('/');
+					navigate('/', { replace: true });
 					onClose();
 				} else {
-					navigate('/dashboard');
+					navigate('/dashboard', { replace: true });
 				}
 
 				if (setIsUserLoggedIn) {

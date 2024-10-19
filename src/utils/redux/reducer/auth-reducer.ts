@@ -52,6 +52,14 @@ export const AuthReducer = createSlice({
 		},
 		logoutSuccess: (state) => {
 			state.isLogin = false;
+			state.user = {
+				avatar_url: '',
+				email: '',
+				first_name: '',
+				id: 0,
+				last_name: '',
+				role_id: 0,
+			};
 			localStorage.removeItem('token');
 		},
 		keepLoginSuccess: (state) => {
@@ -92,24 +100,20 @@ export const keepLogin = () => {
 		try {
 			const token = localStorage.getItem('token');
 
-			console.log('KEEP LOGIN: ', token);
-
 			if (token) {
-				const res = await axios.get(`${import.meta.env.VITE_API_URL}/auth/keep-login`, {
+				const res = await axios.get(`${import.meta.env.VITE_APP_API_URL}/auth/keep-login`, {
 					headers: {
 						Authorization: `Bearer ${token}`,
 					},
 				});
-
-				console.log('KEEP LOGIN res?.data?.data: ', res?.data?.data?.user);
-				console.log('KEEP LOGIN res?.data?.data?.user: ', res?.data?.data?.user);
 
 				dispatch(setUser(res?.data?.data));
 
 				dispatch(keepLoginSuccess());
 			}
 		} catch (error) {
-			localStorage.removeItem('token');
+			// localStorage.removeItem('token');
+			console.error('[ERROR] ', error);
 			throw error;
 		}
 	};
