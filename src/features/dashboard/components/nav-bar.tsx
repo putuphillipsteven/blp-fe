@@ -1,4 +1,4 @@
-import { Box, Flex, Icon, useTheme } from '@chakra-ui/react';
+import { Flex, Icon, useTheme } from '@chakra-ui/react';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import { ProfileModal } from './profile-modal';
 interface NavBarProps {
@@ -6,14 +6,14 @@ interface NavBarProps {
 }
 export default function NavBar({ toggleSideNavDisplay }: NavBarProps) {
 	const theme = useTheme();
-
 	return (
 		<Flex
 			w={'100%'}
 			h={'fit-content'}
 			p={'.5em'}
+			borderRadius={'.5em'}
 			justifyContent={'space-between'}
-			border={`2px solid ${theme.colors.border}`}
+			border={`2px solid ${theme.colors.primary}`}
 			rowGap={'.5em'}
 			flexDir={{ base: 'column' }}
 		>

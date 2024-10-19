@@ -7,11 +7,13 @@ import { useState } from 'react';
 
 export default function Dashboard() {
 	const [sideNavDisplay, setSideNavDisplay] = useState(true);
+
 	const toggleSideNav = () => {
 		setSideNavDisplay(!sideNavDisplay);
 	};
 
 	const theme = useTheme();
+
 	return (
 		<Box
 			maxW={'100vw'}
@@ -41,7 +43,8 @@ export default function Dashboard() {
 						py={'.3em'}
 						px={'1em'}
 						bgColor={'background'}
-						border={`2px solid ${theme.colors.border}`}
+						borderRadius={'.5em'}
+						border={`2px solid ${theme.colors.primary}`}
 					>
 						<Outlet />
 					</Box>

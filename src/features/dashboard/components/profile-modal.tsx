@@ -1,6 +1,8 @@
 import {
 	Flex,
+	Heading,
 	Image,
+	Link,
 	Menu,
 	MenuButton,
 	MenuItem,
@@ -9,9 +11,31 @@ import {
 	useTheme,
 	VStack,
 } from '@chakra-ui/react';
+import { useEffect, useState } from 'react';
+import { store } from '../../../utils/redux/store';
+import { useDispatch } from 'react-redux';
+import { logoutSuccess } from '../../../utils/redux/reducer/auth-reducer';
+import { useNavigate } from 'react-router-dom';
 
 export const ProfileModal = () => {
 	const theme = useTheme();
+
+	const dispatch = useDispatch();
+
+	const navigate = useNavigate();
+
+	const user = store.getState().AuthReducer;
+
+	const [isUserLoggedIn, setIsUserLoggedIn] = useState(user.isLogin);
+
+	useEffect(() => {
+		setIsUserLoggedIn(user.isLogin);
+	}, [isUserLoggedIn, setIsUserLoggedIn]);
+
+	const userFullName = user?.user.first_name + ' ' + user?.user.last_name;
+
+	const userEmail = user?.user?.email;
+
 	return (
 		<Menu autoSelect={false}>
 			<MenuButton>
@@ -25,36 +49,37 @@ export const ProfileModal = () => {
 					<Image objectFit={'contain'} maxW={'100%'} height={'auto'} src='/ck-logo.png' />
 				</Flex>
 			</MenuButton>
-			<MenuList marginTop={'1em'} display={'flex'} flexDir={'column'}>
+			<MenuList
+				marginTop={'1em'}
+				display={'flex'}
+				flexDir={'column'}
+				border={`2px solid ${theme.colors.primary}`}
+			>
 				<MenuItem>
 					<Flex w={'100%'} justifyContent={'flex-end'} columnGap={'1em'}>
 						<VStack alignItems={'end'} spacing={'0'}>
-							<Text fontWeight={'medium'} fontSize={{ base: '.75em' }}>
-								Name
-							</Text>
-							<Text fontWeight={'medium'} fontSize={{ base: '.75em' }}>
-								email@gmail.com
-							</Text>
+							<Heading as={'h2'} fontSize={{ base: '1em' }}>
+								{userFullName}
+							</Heading>
+							<Text fontSize={{ base: '.75em' }}>{userEmail}</Text>
 						</VStack>
-						<Flex
-							border={`2px solid ${theme.colors.border}`}
-							w={'2em'}
-							h={'2em'}
-							borderRadius={'50%'}
-							overflow={'hidden'}
+					</Flex>
+				</MenuItem>
+				<MenuItem>
+					<Flex w={'100%'} justifyContent={'flex-end'}>
+						<Link>My Profile</Link>
+					</Flex>
+				</MenuItem>
+				<MenuItem>
+					<Flex w={'100%'} justifyContent={'flex-end'}>
+						<Link
+							onClick={() => {
+								dispatch(logoutSuccess());
+								navigate('/');
+							}}
 						>
-							<Image objectFit={'contain'} maxW={'100%'} height={'auto'} src='ck-logo.png' />
-						</Flex>
-					</Flex>
-				</MenuItem>
-				<MenuItem>
-					<Flex w={'100%'} justifyContent={'flex-end'}>
-						<Text>My Profile</Text>
-					</Flex>
-				</MenuItem>
-				<MenuItem>
-					<Flex w={'100%'} justifyContent={'flex-end'}>
-						<Text>Log Out</Text>
+							Sign Out
+						</Link>
 					</Flex>
 				</MenuItem>
 			</MenuList>

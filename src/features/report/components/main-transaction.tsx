@@ -17,7 +17,7 @@ import {
 import { TfiStatsUp } from 'react-icons/tfi';
 import { TfiStatsDown } from 'react-icons/tfi';
 import Pagination from './pagination';
-import { TransactionRepository } from '../../../repositories/transaction.repository';
+import { TransactionRepository } from '../../../repositories/transaction';
 import { TransactionInteractor } from '../../../interactor/transaction.interactor';
 import { TransactionController } from '../../../controller/transaction.controller';
 import { useEffect, useState } from 'react';

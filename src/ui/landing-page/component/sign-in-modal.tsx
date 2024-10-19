@@ -1,9 +1,9 @@
 import {
-	Box,
 	Button,
 	FormControl,
 	FormErrorMessage,
 	FormLabel,
+	Heading,
 	Icon,
 	Input,
 	InputGroup,
@@ -31,15 +31,26 @@ import { useNavigate } from 'react-router-dom';
 import SuccessToast from '../../component/success-toast';
 import ErrorToast from '../../component/error-toast';
 import { store } from '../../../utils/redux/store';
-export default function SignInModal() {
+
+interface SignInModalProps {
+	setIsUserLoggedIn?: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+export default function SignInModal({ setIsUserLoggedIn }: SignInModalProps) {
 	const [showPassword, setShowPassword] = useState(false);
+
 	const toast = useToast();
+
 	const user = store.getState().AuthReducer;
-	console.log('user: ', user);
+
 	const navigate = useNavigate();
+
 	const dispatch = useDispatch<AppDispatch>();
+
 	const theme = useTheme();
+
 	const { isOpen, onOpen, onClose } = useDisclosure();
+
 	const formik = useFormik({
 		validateOnChange: true,
 		validateOnBlur: true,
@@ -50,20 +61,35 @@ export default function SignInModal() {
 		validationSchema: SIGNINSCHEMA,
 		onSubmit: async (values, { resetForm }) => {
 			try {
-				await dispatch(login(values));
+				const userData = await dispatch(login(values));
+
+				const role_id = userData?.data?.data.user.role_id;
+
 				toast({
 					duration: 2000,
 					position: 'bottom',
 					render: () => <SuccessToast message='Login Success' />,
 				});
-				navigate('/dashboard');
+
+				if (role_id === 3) {
+					navigate('/');
+					onClose();
+				} else {
+					navigate('/dashboard');
+				}
+
+				if (setIsUserLoggedIn) {
+					setIsUserLoggedIn(user.isLogin);
+				}
+
 				resetForm({ values: { email: '', password: '' } });
 			} catch (error: any) {
-				const ERRORMESSAGE = error.response.data.errors.message;
+				const errorMessage = error.response.data.errors.message;
+
 				toast({
 					duration: 2000,
 					position: 'bottom',
-					render: () => <ErrorToast message={ERRORMESSAGE} />,
+					render: () => <ErrorToast message={errorMessage} />,
 				});
 			}
 		},
@@ -86,7 +112,11 @@ export default function SignInModal() {
 			<Modal isOpen={isOpen} onClose={customOnClose} closeOnOverlayClick={false}>
 				<ModalOverlay />
 				<ModalContent w={'100%'} mx={'1em'}>
-					<ModalHeader>Sign In</ModalHeader>
+					<ModalHeader>
+						<Heading as={'h1'} size={'md'}>
+							Sign In
+						</Heading>
+					</ModalHeader>
 					<form onSubmit={formik.handleSubmit}>
 						<VStack px={'1em'} align={'stretch'} spacing={'1em'}>
 							<FormControl isInvalid={!!(formik.touched.email && formik.errors.email)}>

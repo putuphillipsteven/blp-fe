@@ -1,7 +1,6 @@
 import { Flex, Heading, VStack, useTheme } from '@chakra-ui/react';
 import { BsLaptop } from 'react-icons/bs';
 import { TbBoxSeam, TbCategory2, TbReport } from 'react-icons/tb';
-import { MdOutlineInventory2 } from 'react-icons/md';
 import { IoIosPeople } from 'react-icons/io';
 import { SideNavLink } from './side-nav-link';
 
@@ -17,7 +16,7 @@ export default function SideNav({ sideNavDisplay }: SideNavProps) {
 			w={sideNavDisplay ? '13.75em' : '3em'}
 			h={'100%'}
 			bgColor={'background'}
-			borderRight={`2px solid ${theme.colors.border}`}
+			borderRight={`2px solid ${theme.colors.primary}`}
 			overflow={'hidden'}
 			display={'flex'}
 			px={sideNavDisplay ? '1em' : '.5em'}

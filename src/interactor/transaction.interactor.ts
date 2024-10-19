@@ -2,21 +2,26 @@ import { Transaction } from '../entities/transaction';
 import {
 	CreateTransactionProps,
 	GetTransactionFilters,
-	ITranscationInteractor,
-} from '../interfaces/i.transaction.interactor';
-import { ITransactionRepository } from '../interfaces/i.transaction.repository';
+	GetTransactionReturnProps,
+	TransactionUseCases,
+} from '../interfaces/transaction';
+import { TransactionRepository } from '../repositories/transaction';
 
-export class TransactionInteractor implements ITranscationInteractor {
-	private repository: ITransactionRepository;
+export class TransactionInteractor implements TransactionUseCases {
+	private repository: TransactionRepository;
 
-	constructor(repository: ITransactionRepository) {
+	constructor(repository: TransactionRepository) {
 		this.repository = repository;
 	}
-	async get(filter: GetTransactionFilters): Promise<Transaction[] | undefined> {
-		const transaction = await this.repository.getTransaction(filter);
-		return transaction;
+	async get(args: GetTransactionFilters): Promise<GetTransactionReturnProps | undefined> {
+		try {
+			const res = await this.repository.get(args);
+			return res;
+		} catch (error) {
+			throw error;
+		}
 	}
-	create(input: CreateTransactionProps): Promise<Transaction | undefined> {
+	create(args: CreateTransactionProps): Promise<Transaction | undefined> {
 		throw new Error('Method not implemented.');
 	}
 }

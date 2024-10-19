@@ -18,18 +18,21 @@ export const SideNavLink = ({ icon, text, to, sideNavDisplay }: SideNavLinkProps
 			<Flex
 				w={'100%'}
 				h={'2.5em'}
-				borderRadius={'0em'}
+				borderRadius={'.5em'}
 				columnGap={'1em'}
 				alignItems={'center'}
-				border={checkLink(to, pathname) ? `1px solid ${theme.colors.border}` : 'transparent'}
-				background={checkLink(to, pathname) ? `secondary` : 'transparent'}
+				background={checkLink(to, pathname) ? `background` : 'transparent'}
 				_hover={{
-					border: `1px solid ${theme.colors.border}`,
-					background: 'secondary',
-					'& > div > div': {
-						color: 'base-content',
+					background: 'primary',
+					'& > div:nth-child(2) > p': {
+						color: 'white',
+					},
+					'& > div:nth-child(1)': {
+						color: 'white',
 					},
 				}}
+				border={checkLink(to, pathname) ? `2px solid ${theme.colors.primary}` : 'transparent'}
+				shadow={checkLink(to, pathname) ? `0 4px 0 ${theme.colors.primary}` : 'transparent'}
 				justifyContent={sideNavDisplay ? 'start' : 'center'}
 				p={'.65em'}
 				cursor={'pointer'}

@@ -4,15 +4,20 @@ import SignInModal from './sign-in-modal';
 import { store } from '../../../utils/redux/store';
 import { ProfileModal } from '../../../features/dashboard/components/profile-modal';
 import { useEffect, useState } from 'react';
+
 interface NavBarProps {
 	toggleSideNavDisplay: VoidFunction;
 }
+
 export default function NavBar({ toggleSideNavDisplay }: NavBarProps) {
 	const user = store.getState().AuthReducer;
+
 	const [isUserLoggedIn, setIsUserLoggedIn] = useState(user.isLogin);
+
 	useEffect(() => {
 		setIsUserLoggedIn(user.isLogin);
-	}, []);
+	}, [isUserLoggedIn, setIsUserLoggedIn]);
+
 	return (
 		<Flex
 			w={'100%'}
@@ -32,7 +37,7 @@ export default function NavBar({ toggleSideNavDisplay }: NavBarProps) {
 						onClick={toggleSideNavDisplay}
 					/>
 				</Flex>
-				{isUserLoggedIn ? <ProfileModal /> : <SignInModal />}
+				{isUserLoggedIn ? <ProfileModal /> : <SignInModal setIsUserLoggedIn={setIsUserLoggedIn} />}
 			</Flex>
 		</Flex>
 	);

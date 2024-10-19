@@ -72,10 +72,15 @@ export const login = ({ email, password }: LoginAuthReducerProps) => {
 				email,
 				password,
 			});
+
 			const TOKEN = res.data?.data?.token;
+
 			localStorage.setItem('token', TOKEN);
+
 			dispatch(setUser(res?.data?.data?.user));
+
 			dispatch(loginSuccess());
+			return res;
 		} catch (error) {
 			throw error;
 		}
@@ -87,6 +92,8 @@ export const keepLogin = () => {
 		try {
 			const token = localStorage.getItem('token');
 
+			console.log('KEEP LOGIN: ', token);
+
 			if (token) {
 				const res = await axios.get(`${import.meta.env.VITE_API_URL}/auth/keep-login`, {
 					headers: {
@@ -94,11 +101,15 @@ export const keepLogin = () => {
 					},
 				});
 
+				console.log('KEEP LOGIN res?.data?.data: ', res?.data?.data?.user);
+				console.log('KEEP LOGIN res?.data?.data?.user: ', res?.data?.data?.user);
+
 				dispatch(setUser(res?.data?.data));
+
 				dispatch(keepLoginSuccess());
 			}
 		} catch (error) {
-			// localStorage.removeItem('token');
+			localStorage.removeItem('token');
 			throw error;
 		}
 	};
