@@ -5,12 +5,14 @@ import Dashboard from './ui/dashboard/dashboard';
 import MainReport from './features/report/main-report';
 import MainTransaction from './features/report/components/main-transaction';
 import OverView from './ui/dashboard/overview';
+import SignUp from './ui/sign-up/sign-up';
 
 export default function App() {
 	return (
 		<Auth>
 			<Routes>
 				<Route path='/' element={<LandingPage />} />
+				<Route path='/sign-up' element={<SignUp />} />
 				<Route path='/dashboard' element={<Dashboard />}>
 					<Route index element={<OverView />} />
 					<Route path='/dashboard/report' element={<MainReport />}>

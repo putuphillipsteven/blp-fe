@@ -11,8 +11,7 @@ import {
 	useTheme,
 	VStack,
 } from '@chakra-ui/react';
-import { useEffect, useState } from 'react';
-import { RootState, store } from '../../../utils/redux/store';
+import { RootState } from '../../../utils/redux/store';
 import { useDispatch, useSelector } from 'react-redux';
 import { logoutSuccess } from '../../../utils/redux/reducer/auth-reducer';
 import { useNavigate } from 'react-router-dom';
@@ -25,12 +24,6 @@ export const ProfileModal = () => {
 	const navigate = useNavigate();
 
 	const user = useSelector((state: RootState) => state.AuthReducer);
-
-	const [isUserLoggedIn, setIsUserLoggedIn] = useState(user.isLogin);
-
-	useEffect(() => {
-		setIsUserLoggedIn(user.isLogin);
-	}, [isUserLoggedIn, setIsUserLoggedIn]);
 
 	const userFullName = user?.user.first_name + ' ' + user?.user.last_name;
 
