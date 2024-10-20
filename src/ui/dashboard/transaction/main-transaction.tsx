@@ -2,25 +2,22 @@ import {
 	Box,
 	Flex,
 	Grid,
-	HStack,
-	Icon,
 	Input,
 	Table,
 	Tbody,
 	Td,
-	Text,
 	Th,
 	Thead,
 	Tr,
 	useTheme,
 } from '@chakra-ui/react';
-import { TfiStatsUp } from 'react-icons/tfi';
-import { TfiStatsDown } from 'react-icons/tfi';
-import Pagination from './pagination';
 import { TransactionRepository } from '../../../repositories/transaction';
 import { TransactionInteractor } from '../../../interactor/transaction.interactor';
 import { TransactionController } from '../../../controller/transaction.controller';
 import { useEffect, useState } from 'react';
+// import Pagination from './component/pagination';
+import TotalTransactionBox from './component/total-transaction-box';
+import Pagination from './component/pagination-new';
 export default function MainTransaction() {
 	const transactionRepository = new TransactionRepository();
 	const transactionInteractor = new TransactionInteractor(transactionRepository);
@@ -38,97 +35,77 @@ export default function MainTransaction() {
 
 	const [transactions, setTransactions] = useState<any | undefined>([]);
 
-	useEffect(() => {
-		const fetchTransactions = async () => {
-			const response = await getTransactions(); // getTransactions() returns a Promise<Transaction[] | undefined>
-			setTransactions(response); // This line is correct
-		};
+	// useEffect(() => {
+	// 	const fetchTransactions = async () => {
+	// 		const response = await getTransactions(); // getTransactions() returns a Promise<Transaction[] | undefined>
+	// 		setTransactions(response); // This line is correct
+	// 	};
 
-		fetchTransactions();
-	}, []);
+	// 	fetchTransactions();
+	// }, []);
 
 	const theme = useTheme();
 	return (
 		<Box w={'100%'} h={'100%'} py={'.5em'} display={'flex'} flexDir={'column'} rowGap={4}>
 			<Grid
 				columnGap={2}
-				templateColumns='repeat(4, minmax(10em, 1fr))'
+				templateColumns='repeat(4, minmax(9em, 1fr))'
 				templateRows={'1'}
 				h={'fit'}
+				overflowX={{ base: 'scroll', md: 'hidden' }}
 			>
-				<Box border={`2px solid ${theme.colors.border}`} p={'.5em'}>
-					<Text fontWeight={'bold'}>Total Transaction Today</Text>
-					<Text fontWeight={'medium'}>10</Text>
-					<HStack>
-						<Icon as={TfiStatsUp} color={'primary'} />
-						<Text fontSize={'xs'}>+10 from yesterday</Text>
-					</HStack>
-				</Box>
-				<Box border={`2px solid ${theme.colors.border}`} p={'.5em'}>
-					<Text fontWeight={'bold'}>Cash transaction</Text>
-					<Text fontWeight={'medium'}>10</Text>
-					<HStack>
-						<Icon as={TfiStatsDown} color={'destructive'} />
-						<Text color={'destructive'} fontSize={'xs'}>
-							-10 from yesterday
-						</Text>
-					</HStack>
-				</Box>
-				<Box border={`2px solid ${theme.colors.border}`} p={'.5em'}>
-					<Text fontWeight={'bold'}>Debit Transaction</Text>
-					<Text fontWeight={'medium'}>10</Text>
-					<HStack>
-						<Icon as={TfiStatsUp} color={'primary'} />
-						<Text fontSize={'xs'}>QRIS Transaction</Text>
-					</HStack>
-				</Box>
-				<Box border={`2px solid ${theme.colors.border}`} p={'.5em'}>
-					<Text fontWeight={'bold'}>Total Transaction Today</Text>
-					<Text fontWeight={'medium'}>10</Text>
-					<HStack>
-						<Icon as={TfiStatsDown} color={'destructive'} />
-						<Text color={'destructive'} fontSize={'xs'}>
-							-10 from yesterday
-						</Text>
-					</HStack>
-				</Box>
+				<TotalTransactionBox name='Total' />
+				<TotalTransactionBox name='Cash' />
+				<TotalTransactionBox name='Debit' />
+				<TotalTransactionBox name='Transfer' />
 			</Grid>
 			<Box
 				flex={1}
 				w={'100%'}
 				h={'100%'}
-				border={`2px solid ${theme.colors.border}`}
+				border={`2px solid ${theme.colors.primary}`}
 				p={'.5em'}
+				borderRadius={'.5em'}
 				display={'flex'}
 				flexDir={'column'}
+				overflow={'hidden'}
 				rowGap={2}
 			>
-				<Flex columnGap={2} justifyContent={'space-between'} h={'fit'}>
+				<Flex
+					columnGap={'.5em'}
+					rowGap={'.5em'}
+					flexDir={{
+						base: 'column',
+						md: 'row',
+					}}
+					justifyContent={'space-between'}
+					h={'fit'}
+				>
 					<Input
 						placeholder='Select date and time'
-						size='md'
+						size={{ base: 'sm' }}
 						type='date'
 						w={'fit'}
 						p={'.5em'}
-						border={`1px solid ${theme.colors.border}`}
+						border={`2px solid ${theme.colors.border}`}
 						focusBorderColor={'transparent'}
-						_focus={{ border: `1px solid ${theme.colors.ring}`, outline: 'none' }}
+						_focus={{ border: `2px solid ${theme.colors.ring}`, outline: 'none' }}
 						outline={'none'}
-						_hover={{ border: `1px solid ${theme.colors.ring}` }}
-						borderRadius={0}
+						_hover={{ border: `2px solid ${theme.colors.ring}` }}
+						borderRadius={'.5em'}
 					/>
 					<Input
 						placeholder='Input text...'
-						size='md'
+						size={{ base: 'sm' }}
 						type='text'
 						w={'fit'}
 						p={'.5em'}
-						border={`1px solid ${theme.colors.border}`}
+						border={`2px solid ${theme.colors.border}`}
 						focusBorderColor={'transparent'}
-						_focus={{ border: `1px solid ${theme.colors.ring}`, outline: 'none' }}
+						_focus={{ border: `2px solid ${theme.colors.ring}`, outline: 'none' }}
 						outline={'none'}
-						_hover={{ border: `1px solid ${theme.colors.ring}` }}
-						borderRadius={0}
+						_hover={{ border: `2px solid ${theme.colors.ring}` }}
+						borderRadius={'.5em'}
 					/>
 				</Flex>
 				<Box
@@ -166,6 +143,7 @@ export default function MainTransaction() {
 							})}
 						</Tbody>
 					</Table>
+					{/* <Pagination /> */}
 					<Pagination />
 				</Box>
 			</Box>

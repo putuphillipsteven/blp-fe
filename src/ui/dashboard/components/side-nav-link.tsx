@@ -24,10 +24,10 @@ export const SideNavLink = ({ icon, text, to, sideNavDisplay }: SideNavLinkProps
 				background={checkLink(to, pathname) ? `background` : 'transparent'}
 				_hover={{
 					background: 'primary',
-					'& > div:nth-child(2) > p': {
+					'& > div:nth-of-type(2) > p': {
 						color: 'white',
 					},
-					'& > div:nth-child(1)': {
+					'& > div:nth-of-type(1)': {
 						color: 'white',
 					},
 				}}

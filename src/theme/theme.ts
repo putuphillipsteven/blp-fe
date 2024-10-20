@@ -14,7 +14,7 @@ const theme = extendTheme({
 					borderRadius: '0.5em',
 					transition: 'transform .3s',
 					_hover: {
-						bgColor: '#F99B2A',
+						backgroundColor: '#F99B2A',
 						boxShadow: 'lg',
 						transform: 'scale(1.05)',
 					},

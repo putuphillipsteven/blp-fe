@@ -46,13 +46,13 @@ export default function Pagination() {
 	return (
 		<Box
 			w={'fit-content'}
-			p={'.5em'}
-			border={`1px solid ${theme.colors.border}`}
+			p={{ base: '.1em .5em' }}
+			border={`2px solid ${theme.colors.border}`}
 			display={'flex'}
-			columnGap={'1em'}
+			columnGap={{ base: '.2em' }}
 			alignItems={'center'}
+			borderRadius={'.5em'}
 		>
-			<Text>Page</Text>
 			<Icon
 				as={MdOutlineKeyboardArrowLeft}
 				fontSize={'xl'}
@@ -60,7 +60,7 @@ export default function Pagination() {
 				_hover={{ cursor: 'pointer' }}
 				visibility={page > 1 ? 'visible' : 'hidden'}
 			/>
-			<HStack spacing={'2em'} align={'center'}>
+			<HStack spacing={{ base: '.5em' }} align={'center'}>
 				{pagination.map((pageNumber) => (
 					<Flex
 						alignItems={'center'}

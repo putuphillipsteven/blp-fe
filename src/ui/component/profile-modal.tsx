@@ -11,10 +11,10 @@ import {
 	useTheme,
 	VStack,
 } from '@chakra-ui/react';
-import { RootState } from '../../../utils/redux/store';
 import { useDispatch, useSelector } from 'react-redux';
-import { logoutSuccess } from '../../../utils/redux/reducer/auth-reducer';
 import { useNavigate } from 'react-router-dom';
+import { logoutSuccess } from '../../utils/redux/reducer/auth-reducer';
+import { RootState } from '../../utils/redux/store';
 
 export const ProfileModal = () => {
 	const theme = useTheme();
@@ -48,7 +48,7 @@ export const ProfileModal = () => {
 				flexDir={'column'}
 				border={`2px solid ${theme.colors.primary}`}
 			>
-				<MenuItem>
+				<MenuItem _hover={{ bgColor: 'transparent' }}>
 					<Flex w={'100%'} justifyContent={'flex-end'} columnGap={'1em'}>
 						<VStack alignItems={'end'} spacing={'0'}>
 							<Heading as={'h2'} fontSize={{ base: '1em' }}>
@@ -58,12 +58,12 @@ export const ProfileModal = () => {
 						</VStack>
 					</Flex>
 				</MenuItem>
-				<MenuItem>
+				<MenuItem _hover={{ bgColor: 'transparent' }}>
 					<Flex w={'100%'} justifyContent={'flex-end'}>
 						<Link>My Profile</Link>
 					</Flex>
 				</MenuItem>
-				<MenuItem>
+				<MenuItem _hover={{ bgColor: 'transparent' }}>
 					<Flex w={'100%'} justifyContent={'flex-end'}>
 						<Link
 							onClick={() => {

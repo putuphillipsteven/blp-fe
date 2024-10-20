@@ -2,8 +2,8 @@ import { Flex, Icon } from '@chakra-ui/react';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import SignInModal from './sign-in-modal';
 import { RootState } from '../../../utils/redux/store';
-import { ProfileModal } from '../../../features/dashboard/components/profile-modal';
 import { useSelector } from 'react-redux';
+import { ProfileModal } from '../../component/profile-modal';
 
 interface NavBarProps {
 	toggleSideNavDisplay: VoidFunction;

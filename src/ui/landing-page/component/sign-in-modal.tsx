@@ -32,16 +32,10 @@ import SuccessToast from '../../component/success-toast';
 import ErrorToast from '../../component/error-toast';
 import { store } from '../../../utils/redux/store';
 
-interface SignInModalProps {
-	setIsUserLoggedIn?: React.Dispatch<React.SetStateAction<boolean>>;
-}
-
-export default function SignInModal({ setIsUserLoggedIn }: SignInModalProps) {
+export default function SignInModal() {
 	const [showPassword, setShowPassword] = useState(false);
 
 	const toast = useToast();
-
-	const user = store.getState().AuthReducer;
 
 	const navigate = useNavigate();
 
@@ -78,14 +72,9 @@ export default function SignInModal({ setIsUserLoggedIn }: SignInModalProps) {
 					navigate('/dashboard', { replace: true });
 				}
 
-				if (setIsUserLoggedIn) {
-					setIsUserLoggedIn(user.isLogin);
-				}
-
 				resetForm({ values: { email: '', password: '' } });
 			} catch (error: any) {
 				const errorMessage = error.response.data.errors.message;
-
 				toast({
 					duration: 2000,
 					position: 'bottom',
@@ -124,6 +113,7 @@ export default function SignInModal({ setIsUserLoggedIn }: SignInModalProps) {
 									Email
 								</FormLabel>
 								<Input
+									autoComplete='off'
 									name='email'
 									placeholder='Enter your email...'
 									type='email'
@@ -131,7 +121,7 @@ export default function SignInModal({ setIsUserLoggedIn }: SignInModalProps) {
 									onChange={formik.handleChange}
 									onBlur={formik.handleBlur}
 									w={'100%'}
-									_hover={'none'}
+									// _hover={'none'}
 									focusBorderColor={`${theme.colors.primary}`}
 									_invalid={{
 										bgColor: theme.colors.background,
@@ -168,10 +158,11 @@ export default function SignInModal({ setIsUserLoggedIn }: SignInModalProps) {
 								</FormLabel>
 								<InputGroup position={'relative'}>
 									<Input
+										autoComplete='off'
 										name='password'
 										placeholder='Enter your password...'
 										w={'100%'}
-										_hover={'none'}
+										// _hover={'none'}
 										type={showPassword ? 'text' : 'password'}
 										onChange={formik.handleChange}
 										onBlur={formik.handleBlur}

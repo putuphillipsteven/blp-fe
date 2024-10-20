@@ -17,7 +17,7 @@ export const table = {
 			tbody: {
 				tr: {
 					border: '1.5px solid #f3f3f3',
-					'&:hover': {
+					hover: {
 						backgroundColor: '#f3f3f3',
 						cursor: 'pointer',
 					},

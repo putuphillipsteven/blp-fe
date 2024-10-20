@@ -1,9 +1,9 @@
 import { Outlet } from 'react-router-dom';
 
 import { Box, Flex, useTheme } from '@chakra-ui/react';
-import SideNav from '../../features/dashboard/components/side-nav';
-import NavBar from '../../features/dashboard/components/nav-bar';
 import { useState } from 'react';
+import SideNav from './components/side-nav';
+import NavBar from './components/nav-bar';
 
 export default function Dashboard() {
 	const [sideNavDisplay, setSideNavDisplay] = useState(true);
@@ -40,7 +40,7 @@ export default function Dashboard() {
 						w={'100%'}
 						h={'100%'}
 						overflow={'hidden'}
-						py={'.3em'}
+						py={'1em'}
 						px={'1em'}
 						bgColor={'background'}
 						borderRadius={'.5em'}
