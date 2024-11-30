@@ -20,14 +20,15 @@ const router = createBrowserRouter([
 	{
 		path: 'dashboard',
 		element: (
-			<ManagerEmployeeProtectedRoute>
-				<Dashboard />
-			</ManagerEmployeeProtectedRoute>
+			<Dashboard />
 		),
 		children: [
 			{
 				index: true,
-				element: <OverView />,
+				element:
+					<ManagerEmployeeProtectedRoute>
+						<OverView />
+					</ManagerEmployeeProtectedRoute>
 			},
 			{
 				path: 'transaction',

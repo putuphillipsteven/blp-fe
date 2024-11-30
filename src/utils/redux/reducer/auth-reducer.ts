@@ -2,7 +2,7 @@ import axios from 'axios';
 import { User as UserEntities } from '../../../entities/user';
 import { createSlice } from '@reduxjs/toolkit';
 import { AppDispatch } from '../store';
-
+import { AxiosError } from "axios";
 type User = Omit<
 	UserEntities,
 	| 'phone_number'
@@ -48,9 +48,11 @@ export const AuthReducer = createSlice({
 			};
 		},
 		loginSuccess: (state) => {
+			console.log('keepLoginSuccess called. Setting isLogin to true.');
 			state.isLogin = true;
 		},
 		logoutSuccess: (state) => {
+			console.log('logoutSuccess called. Resetting user state.');
 			state.isLogin = false;
 			state.user = {
 				avatar_url: '',
@@ -63,6 +65,7 @@ export const AuthReducer = createSlice({
 			localStorage.removeItem('token');
 		},
 		keepLoginSuccess: (state) => {
+			console.log('keepLoginSuccess called. Setting isLogin to true.');
 			state.isLogin = true;
 		},
 	},
@@ -76,7 +79,7 @@ interface LoginAuthReducerProps {
 export const login = ({ email, password }: LoginAuthReducerProps) => {
 	return async (dispatch: AppDispatch) => {
 		try {
-			const res = await axios.post(`${import.meta.env.VITE_APP_API_URL}/auth/login`, {
+			const res = await axios.post(`${import.meta.env.VITE_APP_API_URL}/v1/auth/login`, {
 				email,
 				password,
 			});
@@ -90,7 +93,12 @@ export const login = ({ email, password }: LoginAuthReducerProps) => {
 			dispatch(loginSuccess());
 			return res;
 		} catch (error) {
-			throw error;
+			if (error instanceof AxiosError) {
+				console.error('Login API Error:', error.response?.data);
+				return Promise.reject(error.response?.data); // Propagate the error properly
+			}
+
+			return Promise.reject(error); // Handle non-Axios errors
 		}
 	};
 };
@@ -101,7 +109,7 @@ export const keepLogin = () => {
 			const token = localStorage.getItem('token');
 
 			if (token) {
-				const res = await axios.get(`${import.meta.env.VITE_APP_API_URL}/auth/keep-login`, {
+				const res = await axios.get(`${import.meta.env.VITE_APP_API_URL}/v1/auth/keep-login`, {
 					headers: {
 						Authorization: `Bearer ${token}`,
 					},

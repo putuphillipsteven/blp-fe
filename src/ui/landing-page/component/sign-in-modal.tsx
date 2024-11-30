@@ -30,7 +30,7 @@ import { AppDispatch } from '../../../utils/redux/store';
 import { useNavigate } from 'react-router-dom';
 import SuccessToast from '../../component/success-toast';
 import ErrorToast from '../../component/error-toast';
-import { store } from '../../../utils/redux/store';
+import {AxiosError} from "axios";
 
 export default function SignInModal() {
 	const [showPassword, setShowPassword] = useState(false);
@@ -73,8 +73,15 @@ export default function SignInModal() {
 				}
 
 				resetForm({ values: { email: '', password: '' } });
-			} catch (error: any) {
-				const errorMessage = error.response.data.errors.message;
+			} catch (err) {
+				let errorMessage = 'Something went wrong';
+
+				if (err instanceof AxiosError) {
+					errorMessage = err.response?.data?.errors?.message || 'An error occurred';
+				}
+
+				console.error('sign in modal error: ', err);
+
 				toast({
 					duration: 2000,
 					position: 'bottom',

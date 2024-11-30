@@ -1,16 +1,17 @@
 import { useSelector } from 'react-redux';
 import { RootState } from '../../utils/redux/store';
-import { Box } from '@chakra-ui/react';
 import { Navigate } from 'react-router-dom';
 
 interface ManagerEmployeeProtectedRouteProps {
-	children: any;
+	children: React.ReactNode;
 }
 
 export default function ManagerEmployeeProtectedRoute({
 	children,
 }: ManagerEmployeeProtectedRouteProps) {
 	const user = useSelector((state: RootState) => state.AuthReducer);
+
+	console.log("user: ", user)
 
 	const roleId = user.user.role_id;
 
@@ -23,8 +24,10 @@ export default function ManagerEmployeeProtectedRoute({
 	if (isManagerOrEmployee) {
 		return <>{children}</>;
 	} else if (!isManagerOrEmployee) {
+		console.log("Sorry access is blocked, your role_id: ", roleId);
 		return <Navigate to='/' />;
 	} else if (isLoggedIn) {
+		console.log("Sorry login first please");
 		return <Navigate to='/signin' />;
 	}
 }
