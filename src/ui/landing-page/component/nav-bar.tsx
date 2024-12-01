@@ -11,7 +11,7 @@ interface NavBarProps {
 
 export default function NavBar({ toggleSideNavDisplay }: NavBarProps) {
 	const user = useSelector((state: RootState) => state.AuthReducer);
-
+	console.log("USER NAVBAR: ", user)
 	return (
 		<Flex
 			w={'100%'}

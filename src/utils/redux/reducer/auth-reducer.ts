@@ -3,6 +3,7 @@ import { User as UserEntities } from '../../../entities/user';
 import { createSlice } from '@reduxjs/toolkit';
 import { AppDispatch } from '../store';
 import { AxiosError } from "axios";
+
 type User = Omit<
 	UserEntities,
 	| 'phone_number'
@@ -22,8 +23,7 @@ interface InitialStateAuthReducer {
 const initialState: InitialStateAuthReducer = {
 	user: {
 		id: null,
-		first_name: '',
-		last_name: '',
+		full_name: '',
 		avatar_url: '',
 		email: '',
 		role_id: null,
@@ -36,36 +36,28 @@ export const AuthReducer = createSlice({
 	initialState,
 	reducers: {
 		setUser: (state, action) => {
-			const { avatar_url, email, first_name, id, last_name, role_id }: User = action.payload;
+			const { avatar_url, email, id, full_name, role_id }: User = action.payload;
 
 			state.user = {
 				avatar_url,
 				email,
-				first_name,
 				id,
-				last_name,
+				full_name,
 				role_id,
 			};
 		},
 		loginSuccess: (state) => {
-			console.log('keepLoginSuccess called. Setting isLogin to true.');
+			console.log('LOGIN AJA SUCCESS ANJAY');
 			state.isLogin = true;
 		},
 		logoutSuccess: (state) => {
 			console.log('logoutSuccess called. Resetting user state.');
+			state.user = initialState.user;
 			state.isLogin = false;
-			state.user = {
-				avatar_url: '',
-				email: '',
-				first_name: '',
-				id: 0,
-				last_name: '',
-				role_id: 0,
-			};
 			localStorage.removeItem('token');
 		},
 		keepLoginSuccess: (state) => {
-			console.log('keepLoginSuccess called. Setting isLogin to true.');
+			console.log('KEEP LOGIN SUCCESS ANJAY');
 			state.isLogin = true;
 		},
 	},
@@ -88,8 +80,11 @@ export const login = ({ email, password }: LoginAuthReducerProps) => {
 
 			localStorage.setItem('token', TOKEN);
 
+			console.log("LOGIN AJA: ", res?.data?.data?.user);
+
 			dispatch(setUser(res?.data?.data?.user));
 
+			console.log("DISPATCHING LOGIN AJA SUKSES")
 			dispatch(loginSuccess());
 			return res;
 		} catch (error) {
@@ -115,17 +110,21 @@ export const keepLogin = () => {
 					},
 				});
 
-				dispatch(setUser(res?.data?.data));
+				console.log("KEEP LOGIN DISPATCH: ", res?.data?.data?.user);
+
+				dispatch(setUser(res?.data?.data?.user));
 
 				dispatch(keepLoginSuccess());
+
+				console.log("DISPATCH KEEP LOGIN SUCCESS SUKSES")
 			}
 		} catch (error) {
-			// localStorage.removeItem('token');
+			localStorage.removeItem('token');
 			console.error('[ERROR] ', error);
 			throw error;
 		}
 	};
 };
+
 export const { loginSuccess, logoutSuccess, setUser, keepLoginSuccess } = AuthReducer.actions;
 
-export default AuthReducer.reducer;

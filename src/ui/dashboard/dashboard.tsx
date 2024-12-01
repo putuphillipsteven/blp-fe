@@ -46,7 +46,7 @@ export default function Dashboard() {
 						borderRadius={'.5em'}
 						border={`2px solid ${theme.colors.primary}`}
 					>
-						<Outlet />
+							<Outlet />
 					</Box>
 				</Flex>
 			</Box>

@@ -1,12 +1,12 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import Auth from './ui/landing-page/component/auth';
+// import Auth from './ui/landing-page/component/auth';
 import LandingPage from './ui/landing-page/landing-page';
 import Dashboard from './ui/dashboard/dashboard';
 import OverView from './ui/dashboard/overview';
 import SignUp from './ui/sign-up/sign-up';
 import RootError from './ui/error-pages/root-error';
-import ManagerEmployeeProtectedRoute from './ui/auth/manager-employee-protected-route';
 import MainTransaction from './ui/dashboard/transaction/main-transaction';
+import ManagerEmployeeProtectedRoute from "./ui/auth/manager-employee-protected-route";
 
 const router = createBrowserRouter([
 	{
@@ -14,21 +14,20 @@ const router = createBrowserRouter([
 		element: <LandingPage />,
 	},
 	{
-		path: 'sign-up',
+		path: '/sign-up',
 		element: <SignUp />,
 	},
 	{
-		path: 'dashboard',
+		path: '/dashboard',
 		element: (
-			<Dashboard />
+			<ManagerEmployeeProtectedRoute>
+				<Dashboard />
+			</ManagerEmployeeProtectedRoute>
 		),
 		children: [
 			{
 				index: true,
-				element:
-					<ManagerEmployeeProtectedRoute>
-						<OverView />
-					</ManagerEmployeeProtectedRoute>
+				element: <OverView />
 			},
 			{
 				path: 'transaction',
@@ -44,8 +43,6 @@ const router = createBrowserRouter([
 
 export default function App() {
 	return (
-		<Auth>
 			<RouterProvider router={router} />
-		</Auth>
 	);
 }
