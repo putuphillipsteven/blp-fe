@@ -76,16 +76,18 @@ export const login = ({ email, password }: LoginAuthReducerProps) => {
 				password,
 			});
 
-			const TOKEN = res.data?.data?.token;
+			const token = res.data?.data?.token;
 
-			localStorage.setItem('token', TOKEN);
+			const refreshToken = res.data.data?.refreshToken;
 
-			console.log("LOGIN AJA: ", res?.data?.data?.user);
+			localStorage.setItem('token', token);
+
+			localStorage.setItem('refreshToken', refreshToken);
 
 			dispatch(setUser(res?.data?.data?.user));
 
-			console.log("DISPATCHING LOGIN AJA SUKSES")
 			dispatch(loginSuccess());
+
 			return res;
 		} catch (error) {
 			if (error instanceof AxiosError) {
