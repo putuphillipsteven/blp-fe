@@ -1,6 +1,6 @@
 import { Flex, Icon, useTheme } from '@chakra-ui/react';
 import { GiHamburgerMenu } from 'react-icons/gi';
-import { ProfileModal } from '../../component/profile-modal';
+import { ProfileModal } from '../../../component/profile-modal';
 interface NavBarProps {
 	toggleSideNavDisplay: VoidFunction;
 }

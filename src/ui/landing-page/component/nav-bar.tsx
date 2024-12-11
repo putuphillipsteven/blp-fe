@@ -1,9 +1,10 @@
-import { Flex, Icon } from '@chakra-ui/react';
+import {Flex, HStack, Icon} from '@chakra-ui/react';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import SignInModal from './sign-in-modal';
 import { RootState } from '../../../utils/redux/store';
 import { useSelector } from 'react-redux';
 import { ProfileModal } from '../../component/profile-modal';
+import SignUpModal from "../../dashboard/components/nav-bar/components/sign-up-modal";
 
 interface NavBarProps {
 	toggleSideNavDisplay: VoidFunction;
@@ -11,7 +12,6 @@ interface NavBarProps {
 
 export default function NavBar({ toggleSideNavDisplay }: NavBarProps) {
 	const user = useSelector((state: RootState) => state.AuthReducer);
-	console.log("USER NAVBAR: ", user)
 	return (
 		<Flex
 			w={'100%'}
@@ -38,7 +38,13 @@ export default function NavBar({ toggleSideNavDisplay }: NavBarProps) {
 						onClick={toggleSideNavDisplay}
 					/>
 				</Flex>
-				{user.isLogin ? <ProfileModal /> : <SignInModal />}
+				{user.isLogin ? <ProfileModal /> :
+					<HStack>
+						<SignInModal />
+						<SignUpModal />
+					</HStack>
+
+				}
 			</Flex>
 		</Flex>
 	);

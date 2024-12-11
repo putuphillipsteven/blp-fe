@@ -25,8 +25,6 @@ export const ProfileModal = () => {
 
 	const user = useSelector((state: RootState) => state.AuthReducer);
 
-	console.log("USER PROFILE MODAL: ", user);
-
 	const userFullName = user?.user.full_name;
 
 	const userEmail = user?.user?.email;

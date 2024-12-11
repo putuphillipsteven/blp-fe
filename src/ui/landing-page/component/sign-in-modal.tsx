@@ -21,7 +21,7 @@ import {
 	VStack,
 } from '@chakra-ui/react';
 import { useFormik } from 'formik';
-import { SIGNINSCHEMA } from '../../../utils/schema/sign-in-schema';
+import { UserFormikUtils } from '../../../utils/formik/user.formik.utils';
 import { useState } from 'react';
 import { IoEye, IoEyeOff } from 'react-icons/io5';
 import { useDispatch } from 'react-redux';
@@ -48,11 +48,8 @@ export default function SignInModal() {
 	const formik = useFormik({
 		validateOnChange: true,
 		validateOnBlur: true,
-		initialValues: {
-			email: '',
-			password: '',
-		},
-		validationSchema: SIGNINSCHEMA,
+		initialValues: UserFormikUtils.SignInInitialValues(),
+		validationSchema: UserFormikUtils.SignInSchema(),
 		onSubmit: async (values, { resetForm }) => {
 			try {
 				const userData = await dispatch(login(values));
@@ -211,8 +208,6 @@ export default function SignInModal() {
 											onClick={() => setShowPassword((showPassword) => !showPassword)}
 											backgroundColor={'transparent'}
 											height={'64px'}
-											_hover={''}
-											_active={''}
 											color={'#707070'}
 										>
 											{showPassword ? (
