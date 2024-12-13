@@ -1,5 +1,5 @@
 import { useTheme, VStack } from '@chakra-ui/react';
-import NavBar from './component/nav-bar';
+import LandingPageNavBar from './component/landing-page-nav-bar';
 import { useState } from 'react';
 import {RootState} from "../../utils/redux/store";
 import { useSelector } from 'react-redux';
@@ -20,7 +20,7 @@ export default function LandingPage() {
 			bgColor={theme.colors.bacgkround}
 			borderBottom={`2px solid ${theme.colors.primary}`}
 		>
-			<NavBar toggleSideNavDisplay={toggleSideNav} />
+			<LandingPageNavBar toggleSideNavDisplay={toggleSideNav} />
 		</VStack>
 	);
 }

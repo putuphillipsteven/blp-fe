@@ -1,10 +1,11 @@
-import { Flex, Icon, useTheme } from '@chakra-ui/react';
+import {Flex, Icon, Text, useTheme} from '@chakra-ui/react';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import { ProfileModal } from '../../../component/profile-modal';
+
 interface NavBarProps {
 	toggleSideNavDisplay: VoidFunction;
 }
-export default function NavBar({ toggleSideNavDisplay }: NavBarProps) {
+export default function DashboardNavBar({ toggleSideNavDisplay }: NavBarProps) {
 	const theme = useTheme();
 	return (
 		<Flex
@@ -27,6 +28,7 @@ export default function NavBar({ toggleSideNavDisplay }: NavBarProps) {
 						onClick={toggleSideNavDisplay}
 					/>
 				</Flex>
+				<Text>Anjay</Text>
 				<ProfileModal />
 			</Flex>
 		</Flex>

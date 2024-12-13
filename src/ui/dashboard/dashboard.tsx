@@ -3,7 +3,7 @@ import { Outlet } from 'react-router-dom';
 import { Box, Flex, useTheme } from '@chakra-ui/react';
 import { useState } from 'react';
 import SideNav from './components/side-nav';
-import NavBar from './components/nav-bar/nav-bar';
+import DashboardNavBar from './components/nav-bar/dashboard-nav-bar';
 
 export default function Dashboard() {
 	const [sideNavDisplay, setSideNavDisplay] = useState(true);
@@ -35,7 +35,7 @@ export default function Dashboard() {
 				backgroundColor={'background'}
 			>
 				<Flex w={'100%'} h={'100%'} flexDir={'column'} rowGap={'1.5em'}>
-					<NavBar toggleSideNavDisplay={toggleSideNav} />
+					<DashboardNavBar toggleSideNavDisplay={toggleSideNav} />
 					<Box
 						w={'100%'}
 						h={'100%'}

@@ -1,17 +1,22 @@
-import {Flex, HStack, Icon} from '@chakra-ui/react';
+import {Button, Flex, HStack, Icon, useTheme} from '@chakra-ui/react';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import SignInModal from './sign-in-modal';
 import { RootState } from '../../../utils/redux/store';
 import { useSelector } from 'react-redux';
 import { ProfileModal } from '../../component/profile-modal';
-import SignUpModal from "../../dashboard/components/nav-bar/components/sign-up-modal";
+import {useNavigate} from "react-router-dom";
 
 interface NavBarProps {
 	toggleSideNavDisplay: VoidFunction;
 }
 
-export default function NavBar({ toggleSideNavDisplay }: NavBarProps) {
+export default function LandingPageNavBar({ toggleSideNavDisplay }: NavBarProps) {
+
 	const user = useSelector((state: RootState) => state.AuthReducer);
+
+	const navigate = useNavigate();
+
+	const theme = useTheme();
 	return (
 		<Flex
 			w={'100%'}
@@ -41,7 +46,14 @@ export default function NavBar({ toggleSideNavDisplay }: NavBarProps) {
 				{user.isLogin ? <ProfileModal /> :
 					<HStack>
 						<SignInModal />
-						<SignUpModal />
+						<Button
+							onClick={() => navigate("/sign-up")}
+							bgColor={theme.colors.background}
+							border={`2px solid ${theme.colors.primary}`}
+							shadow={`0 4px 0 ${theme.colors.primary}`}
+						>
+							Sign Up
+						</Button>
 					</HStack>
 
 				}
