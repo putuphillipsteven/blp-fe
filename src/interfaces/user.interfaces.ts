@@ -22,6 +22,11 @@ export interface User {
 
 export type UserWithoutPassword = Omit<User, "password">
 
+export interface UserWithoutPasswordWithToken {
+    user: UserWithoutPassword
+    accessToken: string;
+    refreshToken: string;
+}
 export interface SignUpInitialValues extends  User{
     confirm_password: string | null,
 }
