@@ -30,19 +30,14 @@ import { AppDispatch } from '../../../utils/redux/store';
 import { useNavigate } from 'react-router-dom';
 import SuccessToast from '../../component/success-toast';
 import ErrorToast from '../../component/error-toast';
-import {AxiosError} from "axios";
+import axios from 'axios';
 
 export default function SignInModal() {
 	const [showPassword, setShowPassword] = useState(false);
-
 	const toast = useToast();
-
 	const navigate = useNavigate();
-
 	const dispatch = useDispatch<AppDispatch>();
-
 	const theme = useTheme();
-
 	const { isOpen, onOpen, onClose } = useDisclosure();
 
 	const formik = useFormik({
@@ -53,7 +48,6 @@ export default function SignInModal() {
 		onSubmit: async (values, { resetForm }) => {
 			try {
 				const userData = await dispatch(login(values));
-
 				const role_id = userData?.data?.data.user.role_id;
 
 				toast({
@@ -70,11 +64,13 @@ export default function SignInModal() {
 				}
 
 				resetForm({ values: { email: '', password: '' } });
-			} catch (err) {
+			} catch (err: unknown) {
 				let errorMessage = 'Something went wrong';
 
-				if (err instanceof AxiosError) {
+				if (axios.isAxiosError(err)) {
 					errorMessage = err.response?.data?.errors?.message || 'An error occurred';
+				} else {
+					errorMessage = err?.message;
 				}
 
 				console.error('sign in modal error: ', err);
@@ -92,6 +88,7 @@ export default function SignInModal() {
 		formik.resetForm();
 		onClose();
 	};
+
 	return (
 		<>
 			<Button
@@ -125,7 +122,6 @@ export default function SignInModal() {
 									onChange={formik.handleChange}
 									onBlur={formik.handleBlur}
 									w={'100%'}
-									// _hover={'none'}
 									focusBorderColor={`${theme.colors.primary}`}
 									_invalid={{
 										bgColor: theme.colors.background,
@@ -166,7 +162,6 @@ export default function SignInModal() {
 										name='password'
 										placeholder='Enter your password...'
 										w={'100%'}
-										// _hover={'none'}
 										type={showPassword ? 'text' : 'password'}
 										onChange={formik.handleChange}
 										onBlur={formik.handleBlur}
@@ -205,7 +200,7 @@ export default function SignInModal() {
 									<InputRightElement>
 										<Button
 											variant={'ghost'}
-											onClick={() => setShowPassword((showPassword) => !showPassword)}
+											onClick={() => setShowPassword((show) => !show)}
 											backgroundColor={'transparent'}
 											height={'64px'}
 											color={'#707070'}
