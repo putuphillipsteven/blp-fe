@@ -19,11 +19,13 @@ export default function ManagerEmployeeProtectedRoute({
 
 	const isLoggedIn = Boolean(token);
 
+	console.log("isLoggedIn", isLoggedIn == false);
+
 	if (isManagerOrEmployee) {
 		return <>{children}</>;
-	} else if (!isManagerOrEmployee) {
+	}  else if (isLoggedIn == false) {
+		return <Navigate to='/sign-in' />;
+	}else if (!isManagerOrEmployee) {
 		return <Navigate to='/' />;
-	} else if (isLoggedIn) {
-		return <Navigate to='/signin' />;
 	}
 }

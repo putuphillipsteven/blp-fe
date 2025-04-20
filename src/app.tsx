@@ -7,6 +7,7 @@ import SignUp from './ui/sign-up/sign-up';
 import RootError from './ui/error-pages/root-error';
 import MainTransaction from './ui/dashboard/transaction/main-transaction';
 import ManagerEmployeeProtectedRoute from "./ui/auth/manager-employee-protected-route";
+import SignIn from "./ui/sign-in/sign-in";
 
 const router = createBrowserRouter([
 	{
@@ -16,6 +17,10 @@ const router = createBrowserRouter([
 	{
 		path: '/sign-up',
 		element: <SignUp />,
+	},
+	{
+		path: '/sign-in',
+		element: <SignIn />
 	},
 	{
 		path: '/dashboard',
