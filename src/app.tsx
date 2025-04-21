@@ -8,6 +8,7 @@ import RootError from './ui/error-pages/root-error';
 import MainTransaction from './ui/dashboard/transaction/main-transaction';
 import ManagerEmployeeProtectedRoute from "./ui/auth/manager-employee-protected-route";
 import SignIn from "./ui/sign-in/sign-in";
+import Products from "./ui/dashboard/products/products";
 
 const router = createBrowserRouter([
 	{
@@ -38,6 +39,10 @@ const router = createBrowserRouter([
 				path: 'transaction',
 				element: <MainTransaction />,
 			},
+			{
+				path: 'products',
+				element: <Products />
+			}
 		],
 	},
 	{

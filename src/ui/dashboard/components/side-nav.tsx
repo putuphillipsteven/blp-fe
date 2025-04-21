@@ -47,15 +47,15 @@ export default function SideNav({ sideNavDisplay }: SideNavProps) {
 				/>
 				<SideNavLink
 					sideNavDisplay={sideNavDisplay}
-					text={'Transaction'}
-					icon={<TbReport />}
-					to={'/dashboard/transaction'}
+					text={'Products'}
+					to={'/dashboard/products'}
+					icon={<TbBoxSeam />}
 				/>
 				<SideNavLink
 					sideNavDisplay={sideNavDisplay}
-					text={'Product'}
-					to={'#'}
-					icon={<TbBoxSeam />}
+					text={'Transaction'}
+					icon={<TbReport />}
+					to={'/dashboard/transaction'}
 				/>
 				<SideNavLink
 					sideNavDisplay={sideNavDisplay}

@@ -1,4 +1,4 @@
-import { Outlet } from 'react-router-dom';
+import {Outlet, useLocation} from 'react-router-dom';
 
 import { Box, Flex, useTheme } from '@chakra-ui/react';
 import { useState } from 'react';
@@ -7,6 +7,12 @@ import DashboardNavBar from './components/nav-bar/dashboard-nav-bar';
 
 export default function Dashboard() {
 	const [sideNavDisplay, setSideNavDisplay] = useState(true);
+
+	const location:Location<any> = useLocation();
+
+	const pathname:string = location.pathname
+
+	console.log("pathname", pathname)
 
 	const toggleSideNav = () => {
 		setSideNavDisplay(!sideNavDisplay);
