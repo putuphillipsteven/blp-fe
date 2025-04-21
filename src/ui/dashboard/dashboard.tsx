@@ -12,8 +12,6 @@ export default function Dashboard() {
 
 	const pathname:string = location.pathname
 
-	console.log("pathname", pathname)
-
 	const toggleSideNav = () => {
 		setSideNavDisplay(!sideNavDisplay);
 	};
