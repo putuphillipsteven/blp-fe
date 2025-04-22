@@ -1,9 +1,11 @@
 import {Outlet, useLocation} from 'react-router-dom';
 
-import { Box, Flex, useTheme } from '@chakra-ui/react';
+import {Box, Flex, Text, useTheme} from '@chakra-ui/react';
 import { useState } from 'react';
 import SideNav from './components/side-nav';
 import DashboardNavBar from './components/nav-bar/dashboard-nav-bar';
+import CustomBreadCrumb from "./breadcrumb/breadcrumb";
+import BreadCrumb from "./breadcrumb/breadcrumb";
 
 export default function Dashboard() {
 	const [sideNavDisplay, setSideNavDisplay] = useState(true);
@@ -50,6 +52,7 @@ export default function Dashboard() {
 						borderRadius={'.5em'}
 						border={`2px solid ${theme.colors.primary}`}
 					>
+						<BreadCrumb crumbs={} />
 							<Outlet />
 					</Box>
 				</Flex>
