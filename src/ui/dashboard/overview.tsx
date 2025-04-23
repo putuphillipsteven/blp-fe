@@ -5,7 +5,6 @@ export default function OverView() {
 	return (
 		<Box>
 			<Flex align={'stretch'} flexDir={{ base: 'column' }} rowGap={'1em'}>
-				<Text>Overview</Text>
 				<Flex
 					align={'stretch'}
 					justifyContent={'space-between'}
