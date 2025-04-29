@@ -12,10 +12,11 @@ export default function BreadCrumb() {
     const url: string = '';
 
     const breadcrumbLinks = segments.map((segment: string, i: number) => {
+        console.log("segment: ", segment)
         return (
-            <BreadcrumbItem key={i}>
+            segment !== "" && <BreadcrumbItem key={i}>
                 <BreadcrumbLink
-                    href={url + `/${segment}`}>{segment == '' ? 'Home' : ownCapitalize(segment)}</BreadcrumbLink>
+                    href={url + `/${segment}`}>{segment == '' ? null : ownCapitalize(segment)}</BreadcrumbLink>
             </BreadcrumbItem>
         )
     })

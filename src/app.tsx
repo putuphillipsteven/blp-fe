@@ -1,4 +1,4 @@
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import {createBrowserRouter, RouterProvider} from 'react-router-dom';
 // import Auth from './ui/landing-page/component/auth';
 import LandingPage from './ui/landing-page/landing-page';
 import Dashboard from './ui/dashboard/dashboard';
@@ -11,48 +11,49 @@ import SignIn from "./ui/sign-in/sign-in";
 import Products from "./ui/dashboard/products/products";
 
 const router = createBrowserRouter([
-	{
-		path: '/',
-		element: <LandingPage />,
-	},
-	{
-		path: '/sign-up',
-		element: <SignUp />,
-	},
-	{
-		path: '/sign-in',
-		element: <SignIn />
-	},
-	{
-		path: '/dashboard',
-		element: (
-			<ManagerEmployeeProtectedRoute>
-				<Dashboard />
-			</ManagerEmployeeProtectedRoute>
-		),
-		children: [
-			{
-				index: true,
-				element: <OverView />
-			},
-			{
-				path: 'transaction',
-				element: <MainTransaction />,
-			},
-			{
-				path: 'products',
-				element: <Products />
-			}
-		],
-	},
-	{
-		path: '*',
-		element: <RootError />,
-	},
+    {
+        path: '/',
+        element: <LandingPage/>,
+    },
+    {
+        path: '/sign-up',
+        element: <SignUp/>,
+    },
+    {
+        path: '/sign-in',
+        element: <SignIn/>
+    },
+    {
+        path: '/dashboard',
+        element: (
+            <ManagerEmployeeProtectedRoute>
+                <Dashboard/>
+            </ManagerEmployeeProtectedRoute>
+        ),
+        children: [
+            {
+                path: 'overview',
+                index: true,
+                element: <OverView/>
+            },
+            {
+                path: 'transaction',
+                element: <MainTransaction/>,
+            },
+            {
+                path: 'products',
+                element: <Products/>
+            }
+        ],
+    },
+    {
+        path: '*',
+        element: <RootError/>,
+    },
 ]);
 
 export default function App() {
-	return (
-			<RouterProvider router={router} />
-	);
+    return (
+        <RouterProvider router={router}/>
+    );
 }
