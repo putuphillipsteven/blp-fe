@@ -18,7 +18,6 @@ export default function BreadCrumb() {
     }
 
     const breadcrumbLinks = segments.map((segment: string, i: number) => {
-        console.log("segment: ", segment)
         return (
             segment !== "" && <BreadcrumbItem key={i}>
                 <BreadcrumbLink
