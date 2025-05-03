@@ -10,7 +10,7 @@ export default function BreadCrumb() {
     const segments = pathname.split("/");
 
     function checkIsDashboard(segment: string) {
-        if (segment == "" || segment == "dashboard") {
+        if (segment == "") {
             return null
         } else {
             return ownCapitalize(segment)
@@ -21,7 +21,7 @@ export default function BreadCrumb() {
         return (
             segment !== "" && <BreadcrumbItem key={i}>
                 <BreadcrumbLink
-                    href={`/dashboard/${segment}`}>{checkIsDashboard(segment)}</BreadcrumbLink>
+                    href={segment == 'dashboard' ? 'overview' : segment}>{checkIsDashboard(segment)}</BreadcrumbLink>
             </BreadcrumbItem>
         )
     })

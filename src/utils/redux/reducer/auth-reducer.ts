@@ -1,131 +1,137 @@
 import axios from 'axios';
-import { User as UserEntities } from '../../../entities/user';
-import { createSlice } from '@reduxjs/toolkit';
-import { AppDispatch } from '../store';
-import { AxiosError } from "axios";
+import {User as UserEntities} from '../../../entities/user';
+import {createSlice} from '@reduxjs/toolkit';
+import {AppDispatch} from '../store';
+import {AxiosError} from "axios";
 
 type User = Omit<
-	UserEntities,
-	| 'phone_number'
-	| 'second_phone_number'
-	| 'password'
-	| 'gender_id'
-	| 'created_at'
-	| 'updated_at'
-	| 'deleted_at'
+    UserEntities,
+    | 'phone_number'
+    | 'second_phone_number'
+    | 'password'
+    | 'gender_id'
+    | 'created_at'
+    | 'updated_at'
+    | 'deleted_at'
 >;
 
 interface InitialStateAuthReducer {
-	user: User;
-	isLogin: boolean;
+    user: User;
+    isLogin: boolean;
 }
 
 const initialState: InitialStateAuthReducer = {
-	user: {
-		id: null,
-		full_name: '',
-		avatar_url: '',
-		email: '',
-		role_id: null,
-	},
-	isLogin: false,
+    user: {
+        id: null,
+        first_name: "",
+        full_name: '',
+        avatar_url: '',
+        email: '',
+        role_id: null,
+    },
+    isLogin: false,
 };
 
 export const AuthReducer = createSlice({
-	name: 'AuthReducer',
-	initialState,
-	reducers: {
-		setUser: (state, action) => {
-			const { avatar_url, email, id, full_name, role_id }: User = action.payload;
+    name: 'AuthReducer',
+    initialState,
+    reducers: {
+        setUser: (state, action) => {
+            const {avatar_url, email, id, full_name, role_id, first_name}: User = action.payload;
 
-			state.user = {
-				avatar_url,
-				email,
-				id,
-				full_name,
-				role_id,
-			};
-		},
-		loginSuccess: (state) => {
-			console.log('LOGIN AJA SUCCESS ANJAY');
-			state.isLogin = true;
-		},
-		logoutSuccess: (state) => {
-			console.log('logoutSuccess called. Resetting user state.');
-			state.user = initialState.user;
-			state.isLogin = false;
-			localStorage.removeItem('token');
-		},
-		keepLoginSuccess: (state) => {
-			console.log('KEEP LOGIN SUCCESS ANJAY');
-			state.isLogin = true;
-		},
-	},
+            state.user = {
+                first_name,
+                avatar_url,
+                email,
+                id,
+                full_name,
+                role_id,
+            };
+        },
+        loginSuccess: (state) => {
+            console.log('LOGIN AJA SUCCESS ANJAY');
+            state.isLogin = true;
+        },
+        logoutSuccess: (state) => {
+            console.log('logoutSuccess called. Resetting user state.');
+            state.user = initialState.user;
+            state.isLogin = false;
+            localStorage.removeItem('token');
+        },
+        keepLoginSuccess: (state) => {
+            console.log('KEEP LOGIN SUCCESS ANJAY');
+            state.isLogin = true;
+        },
+    },
 });
 
 interface LoginAuthReducerProps {
-	email: string;
-	password: string;
+    email: string;
+    password: string;
 }
 
-export const login = ({ email, password }: LoginAuthReducerProps) => {
-	return async (dispatch: AppDispatch) => {
-		try {
-			const res = await axios.post(`${import.meta.env.VITE_APP_API_URL}/v1/auth/login`, {
-				email,
-				password,
-			});
+export const login = ({email, password}: LoginAuthReducerProps) => {
+    return async (dispatch: AppDispatch) => {
+        try {
+            const res = await axios.post(`${import.meta.env.VITE_APP_API_URL}/v1/auth/login`, {
+                email,
+                password,
+            });
 
-			const token = res.data?.data?.token;
+            console.log("res", res)
 
-			const refreshToken = res.data.data?.refreshToken;
+            const accessToken = res.data?.data?.accessToken;
 
-			localStorage.setItem('token', token);
+            const refreshToken = res.data.data?.refreshToken;
 
-			localStorage.setItem('refreshToken', refreshToken);
+            localStorage.setItem('accessToken', accessToken);
 
-			dispatch(setUser(res?.data?.data?.user));
+            localStorage.setItem('refreshToken', refreshToken);
 
-			dispatch(loginSuccess());
 
-			return res;
-		} catch (error) {
-			if (error instanceof AxiosError) {
-				console.error('Login API Error:', error.response?.data);
-				return Promise.reject(error.response?.data); // Propagate the error properly
-			}
+            dispatch(setUser(res?.data?.data?.user));
 
-			return Promise.reject(error); // Handle non-Axios errors
-		}
-	};
+            dispatch(loginSuccess());
+
+            return res;
+        } catch (error) {
+            if (error instanceof AxiosError) {
+                console.error('Login API Error:', error.response?.data);
+                return Promise.reject(error.response?.data); // Propagate the error properly
+            }
+
+            return Promise.reject(error); // Handle non-Axios errors
+        }
+    };
 };
 
 export const keepLogin = () => {
-	return async (dispatch: AppDispatch) => {
-		try {
-			const token = localStorage.getItem('token');
+    return async (dispatch: AppDispatch) => {
+        try {
+            const accessToken = localStorage.getItem('accessToken');
 
-			if (token) {
-				const res = await axios.get(`${import.meta.env.VITE_APP_API_URL}/v1/auth/keep-login`, {
-					headers: {
-						Authorization: `Bearer ${token}`,
-					},
-				});
 
-				console.log("KEEP LOGIN DISPATCH: ", res?.data?.data?.user);
+            if (accessToken) {
+                const res = await axios.get(`${import.meta.env.VITE_APP_API_URL}/v1/auth/keep-login`, {
+                    headers: {
+                        Authorization: `Bearer ${accessToken}`,
+                    },
+                });
 
-				dispatch(setUser(res?.data?.data?.user));
+                console.log("KEEP LOGIN DISPATCH: ", res?.data?.data?.user);
 
-				dispatch(keepLoginSuccess());
+                dispatch(setUser(res?.data?.data?.user));
 
-				console.log("DISPATCH KEEP LOGIN SUCCESS SUKSES")
-			}
-		} catch (error) {
-			localStorage.removeItem('token');
-			console.error('[ERROR] ', error);
-			throw error;
-		}
-	};
+                dispatch(keepLoginSuccess());
+
+                console.log("DISPATCH KEEP LOGIN SUCCESS SUKSES")
+            }
+        } catch (error) {
+            localStorage.removeItem('accessToken');
+            console.error('[ERROR] ', error);
+            throw error;
+        }
+    };
 };
 
-export const { loginSuccess, logoutSuccess, setUser, keepLoginSuccess } = AuthReducer.actions;
+export const {loginSuccess, logoutSuccess, setUser, keepLoginSuccess} = AuthReducer.actions;
