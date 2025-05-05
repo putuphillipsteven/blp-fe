@@ -9,6 +9,7 @@ import MainTransaction from './ui/dashboard/transaction/main-transaction';
 import ManagerEmployeeProtectedRoute from "./ui/auth/manager-employee-protected-route";
 import SignIn from "./ui/sign-in/sign-in";
 import Products from "./ui/dashboard/products/products";
+import ProductCategories from "./ui/dashboard/product-categories/product-categories";
 
 const router = createBrowserRouter([
     {
@@ -43,6 +44,10 @@ const router = createBrowserRouter([
             {
                 path: 'products',
                 element: <Products/>
+            },
+            {
+                path: 'product-categories',
+                element: <ProductCategories/>
             }
         ],
     },
