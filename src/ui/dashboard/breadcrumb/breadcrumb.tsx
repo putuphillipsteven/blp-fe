@@ -1,4 +1,4 @@
-import {Breadcrumb, BreadcrumbItem, BreadcrumbLink} from "@chakra-ui/react";
+import {Breadcrumb, BreadcrumbItem, BreadcrumbLink, Text} from "@chakra-ui/react";
 import {useLocation, useNavigate} from "react-router-dom";
 import ownCapitalize from "../../../utils/own-capitalize";
 
@@ -25,14 +25,16 @@ export default function BreadCrumb() {
 
     const breadcrumbLinks = segments.map((segment: string, i: number) => {
         return (
-            segment !== "" && <BreadcrumbItem key={i} onClick={() => breadcrumbNavigate(segment)}>
-                <BreadcrumbLink>{checkIsDashboard(segment)}</BreadcrumbLink>
+            segment !== "" &&
+            <BreadcrumbItem key={i} onClick={() => breadcrumbNavigate(segment)}>
+                <BreadcrumbLink fontSize={{base: "1em"}} noOfLines={1} w={"full"}>
+                    {checkIsDashboard(segment)}
+                </BreadcrumbLink>
             </BreadcrumbItem>
         )
     })
     return (
-
-        <Breadcrumb spacing='8px' separator={'>'}>
+        <Breadcrumb maxW={"full"} spacing={'8px'} separator={'>'} overflowX={"scroll"}>
             {breadcrumbLinks}
         </Breadcrumb>
     )
