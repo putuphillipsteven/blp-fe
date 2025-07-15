@@ -15,7 +15,7 @@ export default function Dashboard() {
     const toggleSideNav = () => {
         setSideNavDisplay(!sideNavDisplay);
     };
-
+        
     const theme = useTheme();
 
     return (

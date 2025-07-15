@@ -1,53 +1,55 @@
-import { Box, Flex, Text, useTheme } from '@chakra-ui/react';
+import {Box, Flex, Text, useTheme} from '@chakra-ui/react';
 import React from 'react';
-import { Link, useLocation } from 'react-router-dom';
-import { checkLink } from '../../../utils/routing';
+import {Link, useLocation} from 'react-router-dom';
+import {checkLink} from '../../../utils/routing';
 
 interface SideNavLinkProps {
-	sideNavDisplay: boolean;
-	to: string;
-	icon: React.ReactElement;
-	text: string;
+    sideNavDisplay: boolean;
+    to: string;
+    icon: React.ReactElement;
+    text: string;
 }
 
-export const SideNavLink = ({ icon, text, to, sideNavDisplay }: SideNavLinkProps) => {
-	const pathname = useLocation().pathname;
-	const theme = useTheme();
-	return (
-		<Link to={to} style={{ width: '100%' }}>
-			<Flex
-				w={'100%'}
-				h={'2.5em'}
-				borderRadius={'.5em'}
-				columnGap={'1em'}
-				alignItems={'center'}
-				background={checkLink(to, pathname) ? `background` : 'transparent'}
-				_hover={{
-					background: 'primary',
-					'& > div:nth-of-type(2) > p': {
-						color: 'white',
-					},
-					'& > div:nth-of-type(1)': {
-						color: 'white',
-					},
-				}}
-				border={checkLink(to, pathname) ? `2px solid ${theme.colors.primary}` : 'transparent'}
-				shadow={checkLink(to, pathname) ? `0 4px 0 ${theme.colors.primary}` : 'transparent'}
-				justifyContent={sideNavDisplay ? 'start' : 'center'}
-				p={'.65em'}
-				cursor={'pointer'}
-				overflow={'hidden'}
-			>
-				<Box color={checkLink(to, pathname) ? `primary` : `muted-foreground`}>{icon}</Box>
-				<Box display={sideNavDisplay ? 'flex' : 'none'}>
-					<Text
-						color={checkLink(to, pathname) ? `primary` : `muted-foreground`}
-						fontWeight={checkLink(to, pathname) ? `medium` : `normal`}
-					>
-						{text}
-					</Text>
-				</Box>
-			</Flex>
-		</Link>
-	);
+export const SideNavLink = ({icon, text, to, sideNavDisplay}: SideNavLinkProps) => {
+    const pathname = useLocation().pathname;
+    const theme = useTheme();
+    return (
+        <Link to={to} style={{width: '100%'}}>
+            <Flex
+                w={'100%'}
+                // h={'2.5em'}
+                borderRadius={'.5em'}
+                columnGap={'1em'}
+                alignItems={'center'}
+                // backgroundColor={'red'}
+                background={checkLink(to, pathname) ? `background` : 'transparent'}
+                _hover={{
+                    background: 'primary',
+                    '& > div:nth-of-type(2) > p': {
+                        color: 'white',
+                    },
+                    '& > div:nth-of-type(1)': {
+                        color: 'white',
+                    },
+                }}
+                border={checkLink(to, pathname) ? `2px solid ${theme.colors.primary}` : 'transparent'}
+                shadow={checkLink(to, pathname) ? `0 4px 0 ${theme.colors.primary}` : 'transparent'}
+                justifyContent={sideNavDisplay ? 'start' : 'center'}
+                p={'.5em'}
+                cursor={'pointer'}
+                overflow={'hidden'}
+            >
+                <Box p={'.25em'}
+                     color={checkLink(to, pathname) ? `primary` : `muted-foreground`}>{icon}</Box>
+                <Box display={sideNavDisplay ? 'flex' : 'none'}>
+                    <Text width={'100%'}
+                          color={checkLink(to, pathname) ? `primary` : `muted-foreground`}
+                          fontWeight={checkLink(to, pathname) ? `medium` : `normal`}
+                    >
+                        {text}
+                    </Text>
+                </Box>
+            </Flex>
+        </Link>
+    );
 };
