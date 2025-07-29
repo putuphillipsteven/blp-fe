@@ -3,6 +3,7 @@ import LandingPageNavBar from './component/landing-page-nav-bar';
 import {useState} from 'react';
 import {RootState} from "../../utils/redux/store";
 import {useSelector} from 'react-redux';
+import Jumbotron from "./component/jumbotron";
 
 export default function LandingPage() {
     const theme = useTheme();
@@ -25,7 +26,9 @@ export default function LandingPage() {
                 <LandingPageNavBar toggleSideNavDisplay={toggleSideNav}/>
             </VStack>
             <Flex p={".5em"}>
-                <Text>Test</Text>
+                <Jumbotron>
+                    <Text>Test</Text>
+                </Jumbotron>
             </Flex>
         </Flex>
 
