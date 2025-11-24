@@ -1,4 +1,4 @@
-import {Breadcrumb, BreadcrumbItem, BreadcrumbLink, Text} from "@chakra-ui/react";
+import {Breadcrumb, BreadcrumbItem, BreadcrumbLink} from "@chakra-ui/react";
 import {useLocation, useNavigate} from "react-router-dom";
 import ownCapitalize from "../../../utils/own-capitalize";
 
@@ -34,7 +34,20 @@ export default function BreadCrumb() {
         )
     })
     return (
-        <Breadcrumb maxW={"full"} spacing={'8px'} separator={'>'} overflowX={"scroll"}>
+        <Breadcrumb minW={"full"} maxW={"full"} spacing={'8px'} separator={'>'}
+                    paddingBottom={".3em"}
+                    overflow={"scroll"}
+                    css={{
+                        '&::-webkit-scrollbar': {
+                            width: "100%",
+                            height: '.3em',
+                        },
+                        '&::-webkit-scrollbar-thumb': {
+                            background: 'var(--chakra-colors-foreground)',
+                            borderRadius: "2em",
+                            width: "10px"
+                        },
+                    }}>
             {breadcrumbLinks}
         </Breadcrumb>
     )
