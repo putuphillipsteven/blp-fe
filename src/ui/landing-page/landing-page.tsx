@@ -1,9 +1,10 @@
-import {Flex, Text, useTheme, VStack} from '@chakra-ui/react';
+import {Flex, HStack, Text, useTheme, VStack} from '@chakra-ui/react';
 import LandingPageNavBar from './component/landing-page-nav-bar';
 import {useState} from 'react';
 import {RootState} from "../../utils/redux/store";
 import {useSelector} from 'react-redux';
 import Jumbotron from "./component/jumbotron";
+import OurCategories from "./component/our-categories";
 
 export default function LandingPage() {
     const theme = useTheme();
@@ -25,11 +26,10 @@ export default function LandingPage() {
             >
                 <LandingPageNavBar toggleSideNavDisplay={toggleSideNav}/>
             </VStack>
-            <Flex p={".5em"}>
-                <Jumbotron>
-                    <Text>Test</Text>
-                </Jumbotron>
-            </Flex>
+            <VStack p={".5em"} align={"stretch"} h="auto" overflow="visible">
+                <Jumbotron/>
+                <OurCategories/>
+            </VStack>
         </Flex>
 
     );
