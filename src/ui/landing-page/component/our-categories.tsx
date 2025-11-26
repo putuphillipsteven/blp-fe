@@ -1,9 +1,9 @@
-import {Box, Container, Grid, Heading, useTheme, VStack} from "@chakra-ui/react";
+import {Box, Flex, Grid, Heading, Text, useTheme, VStack} from "@chakra-ui/react";
 
 export default function OurCategories() {
     const theme = useTheme();
     return (
-        <VStack align={"stretch"} w={"100%"} maxW={"100%"} bgColor={"red"}>
+        <VStack px={".5em"} align={"stretch"} w={"100%"} maxW={"100%"}>
             <Heading as={"h2"} fontSize={"lg"}>Our Categories</Heading>
             <Grid w="100%"
                   maxW="100%"
@@ -15,17 +15,45 @@ export default function OurCategories() {
             >
                 <Box borderRadius={".5em"} boxSizing="border-box"
                      border={`2px solid ${theme.colors.primary}`}
-                     shadow={`0 4px 0 ${theme.colors.primary}`}
-                ></Box>
+                     overflow={"hidden"}
+                >
+                    <Flex w={"100%"} minW={"100%"}
+                          h={"100%"} minH={"100%"}
+                          alignItems={"center"}
+                          justifyContent={"center"}>
+                        <Text>Photo Studio</Text>
+                    </Flex>
+                </Box>
                 <Box borderRadius={".5em"} boxSizing="border-box"
                      border={`2px solid ${theme.colors.primary}`}
-                     shadow={`0 4px 0 ${theme.colors.primary}`}></Box>
+                >
+                    <Flex w={"100%"} minW={"100%"}
+                          h={"100%"} minH={"100%"}
+                          alignItems={"center"}
+                          justifyContent={"center"}>
+                        <Text>Photo Print</Text>
+                    </Flex>
+                </Box>
                 <Box borderRadius={".5em"} boxSizing="border-box"
                      border={`2px solid ${theme.colors.primary}`}
-                     shadow={`0 4px 0 ${theme.colors.primary}`}></Box>
+                >
+                    <Flex w={"100%"} minW={"100%"}
+                          h={"100%"} minH={"100%"}
+                          alignItems={"center"}
+                          justifyContent={"center"}>
+                        <Text>Frame</Text>
+                    </Flex>
+                </Box>
                 <Box borderRadius={".5em"} boxSizing="border-box"
                      border={`2px solid ${theme.colors.primary}`}
-                     shadow={`0 4px 0 ${theme.colors.primary}`}></Box>
+                >
+                    <Flex w={"100%"} minW={"100%"}
+                          h={"100%"} minH={"100%"}
+                          alignItems={"center"}
+                          justifyContent={"center"}>
+                        <Text>Photo Editting</Text>
+                    </Flex>
+                </Box>
             </Grid>
         </VStack>
     )
