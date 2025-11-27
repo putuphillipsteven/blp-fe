@@ -8,6 +8,7 @@ import OurCategories from "./component/our-categories";
 import OurLocation from "./component/our-location";
 import OurContacts from "./component/our-contacts";
 import LandingPageFooter from "./component/landing-page-footer";
+import BestSeller from "./component/best-seller/best-seller";
 
 export default function LandingPage() {
     const theme = useTheme();
@@ -27,11 +28,15 @@ export default function LandingPage() {
                 bgColor={theme.colors.bacgkround}
             >
                 <LandingPageNavBar toggleSideNavDisplay={toggleSideNav}/>
-                <Jumbotron/>
-                <OurCategories/>
-                <OurLocation/>
-                <OurContacts/>
-                <LandingPageFooter/>
+                <VStack px={{base: "0", md: "10em"}}>
+                    <Jumbotron/>
+                    <OurCategories/>
+                    <BestSeller/>
+                    <OurContacts/>
+                    <OurLocation/>
+                    <LandingPageFooter/>
+                </VStack>
+
             </VStack>
         </Container>
 

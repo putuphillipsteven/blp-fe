@@ -10,7 +10,7 @@ export default function OurCategories() {
                   gridTemplateColumns="1fr 1fr"
                   gridAutoRows="10em"
                   alignItems="stretch"
-                  gap="1em"
+                  gap=".5em"
                   minH={"15em"}
             >
                 <Box borderRadius={".5em"} boxSizing="border-box"

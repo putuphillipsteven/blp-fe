@@ -1,10 +1,9 @@
-import {Button, Flex, HStack, Icon, useTheme} from '@chakra-ui/react';
+import {Container, Flex, HStack, Icon, useTheme} from '@chakra-ui/react';
 import {GiHamburgerMenu} from 'react-icons/gi';
 import SignInModal from './sign-in-modal';
 import {RootState} from '../../../utils/redux/store';
 import {useSelector} from 'react-redux';
 import {ProfileModal} from '../../component/profile-modal';
-import {useNavigate} from "react-router-dom";
 
 interface NavBarProps {
     toggleSideNavDisplay: VoidFunction;
@@ -13,8 +12,6 @@ interface NavBarProps {
 export default function LandingPageNavBar({toggleSideNavDisplay}: NavBarProps) {
 
     const user = useSelector((state: RootState) => state.AuthReducer);
-
-    const navigate = useNavigate();
 
     const theme = useTheme();
     return (
@@ -27,6 +24,7 @@ export default function LandingPageNavBar({toggleSideNavDisplay}: NavBarProps) {
             alignItems={'center'}
             flexDir={{base: 'column'}}
             borderBottom={`2px solid ${theme.colors.primary}`}
+            px={{base: "0", md: "10em"}}
         >
             <Flex
                 w={'100%'}
@@ -35,6 +33,20 @@ export default function LandingPageNavBar({toggleSideNavDisplay}: NavBarProps) {
                 alignItems={'center'}
                 overflow={'visible'}
             >
+                {user.isLogin ? <ProfileModal/> :
+                    <HStack>
+                        <SignInModal/>
+                        {/*<Button*/}
+                        {/*    onClick={() => navigate("/sign-up")}*/}
+                        {/*    bgColor={theme.colors.background}*/}
+                        {/*    border={`2px solid ${theme.colors.primary}`}*/}
+                        {/*    shadow={`0 4px 0 ${theme.colors.primary}`}*/}
+                        {/*>*/}
+                        {/*    Sign Up*/}
+                        {/*</Button>*/}
+                    </HStack>
+
+                }
                 <Flex alignItems={'center'} justifyContent={'center'} columnGap={4}>
                     <Icon
                         as={GiHamburgerMenu}
@@ -44,20 +56,6 @@ export default function LandingPageNavBar({toggleSideNavDisplay}: NavBarProps) {
                         onClick={toggleSideNavDisplay}
                     />
                 </Flex>
-                {user.isLogin ? <ProfileModal/> :
-                    <HStack>
-                        <SignInModal/>
-                        <Button
-                            onClick={() => navigate("/sign-up")}
-                            bgColor={theme.colors.background}
-                            border={`2px solid ${theme.colors.primary}`}
-                            shadow={`0 4px 0 ${theme.colors.primary}`}
-                        >
-                            Sign Up
-                        </Button>
-                    </HStack>
-
-                }
             </Flex>
         </Flex>
     );

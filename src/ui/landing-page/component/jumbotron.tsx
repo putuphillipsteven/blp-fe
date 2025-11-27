@@ -8,7 +8,6 @@ export default function Jumbotron() {
                 borderRadius={"1em"}
                 minH={"10em"} h={"10em"} maxH={"10em"}
                 border={`2px solid ${theme.colors.primary}`}
-                shadow={`0 8px 0 ${theme.colors.primary}`}
             >
                 <Image src={"./public/ck-logo.png"}
                        objectFit='contain'

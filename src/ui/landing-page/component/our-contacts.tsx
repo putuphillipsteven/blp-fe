@@ -38,8 +38,7 @@ export default function OurContacts() {
                             height={6}
                             cursor={'pointer'}
                         />
-                        <Link fontSize={{base: "sm", sm: "md"}} color={theme.colors.link}
-                              textDecoration={"underline"}>birulangit.jbi@gmail.com</Link>
+                        <Link fontSize={{base: "sm", sm: "md"}}>birulangit.jbi@gmail.com</Link>
                     </HStack>
                 </VStack>
             </VStack>
