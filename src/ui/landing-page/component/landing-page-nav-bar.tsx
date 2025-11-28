@@ -24,7 +24,7 @@ export default function LandingPageNavBar({toggleSideNavDisplay}: NavBarProps) {
             alignItems={'center'}
             flexDir={{base: 'column'}}
             borderBottom={`2px solid ${theme.colors.primary}`}
-            px={{base: "0", md: "10em"}}
+            px={{base: ".5em", md: "10em"}}
         >
             <Flex
                 w={'100%'}

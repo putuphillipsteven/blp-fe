@@ -36,7 +36,6 @@ export default function LandingPage() {
                     <OurLocation/>
                     <LandingPageFooter/>
                 </VStack>
-
             </VStack>
         </Container>
 
