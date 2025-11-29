@@ -8,7 +8,7 @@ export default function BestSeller() {
             <Grid w="100%"
                   maxW="100%"
                   gridTemplateColumns="1fr 1fr"
-                  gridAutoRows={{base: "18em", sm: "20em"}}
+                  gridAutoRows={{base: "17em", sm: "20em"}}
                   alignItems="stretch"
                   gap=".5em"
                   minH={"15em"}

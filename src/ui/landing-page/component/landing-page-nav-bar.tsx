@@ -18,13 +18,13 @@ export default function LandingPageNavBar({toggleSideNavDisplay}: NavBarProps) {
         <Flex
             w={'100%'}
             h={'4em'}
-            p={'.5em'}
             justifyContent={'space-between'}
             rowGap={'.5em'}
             alignItems={'center'}
             flexDir={{base: 'column'}}
             borderBottom={`2px solid ${theme.colors.primary}`}
             px={{base: ".5em", md: "10em"}}
+            bgColor={{md: "red"}}
         >
             <Flex
                 w={'100%'}
