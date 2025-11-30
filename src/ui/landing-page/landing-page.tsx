@@ -25,10 +25,11 @@ export default function LandingPage() {
             <VStack
                 w={"full"}
                 spacing={'1em'}
-                bgColor={theme.colors.bacgkround}
             >
                 <LandingPageNavBar toggleSideNavDisplay={toggleSideNav}/>
-                <VStack px={{base: "0", md: "10em"}} bgColor={{md: "red"}}>
+                <VStack w={"full"}
+                        align={"stretch"}
+                        px={{base: "0", md: "10em"}}>
                     <Jumbotron/>
                     <OurCategories/>
                     <BestSeller/>
