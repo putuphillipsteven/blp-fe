@@ -28,7 +28,7 @@ export default function LandingPage() {
                 bgColor={theme.colors.bacgkround}
             >
                 <LandingPageNavBar toggleSideNavDisplay={toggleSideNav}/>
-                <VStack px={{base: "0", md: "10em"}}>
+                <VStack px={{base: "0", md: "10em"}} bgColor={{md: "red"}}>
                     <Jumbotron/>
                     <OurCategories/>
                     <BestSeller/>

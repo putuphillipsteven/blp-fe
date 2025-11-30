@@ -3,7 +3,7 @@ import {Box, Container, Image, useTheme} from "@chakra-ui/react";
 export default function Jumbotron() {
     const theme = useTheme();
     return (
-        <Container p={"0.5em"} id={'jumbotron-container'} minW={"100%"} maxW={"100%"}>
+        <Box p={"0.5em"} id={'jumbotron-container'} minW={"100%"} bgColor={"red"} maxW={"100%"}>
             <Box
                 borderRadius={"1em"}
                 minH={"10em"} h={"10em"} maxH={"10em"}
@@ -13,6 +13,6 @@ export default function Jumbotron() {
                        objectFit='contain'
                        minH={"10em"} h={"10em"} maxH={"10em"}/>
             </Box>
-        </Container>
+        </Box>
     )
 }
