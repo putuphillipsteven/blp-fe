@@ -1,6 +1,5 @@
 import {
     AspectRatio,
-    Box,
     Button,
     ButtonGroup,
     Card,
@@ -8,9 +7,8 @@ import {
     CardFooter,
     Divider, Flex,
     Heading,
-    Image, Link,
-    Stack,
-    StackDivider,
+    Image,
+    Link,
     Text,
     useTheme
 } from "@chakra-ui/react";

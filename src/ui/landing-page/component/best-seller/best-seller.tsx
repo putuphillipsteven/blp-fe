@@ -1,4 +1,4 @@
-import {Flex, Grid, Heading, VStack} from "@chakra-ui/react";
+import {Grid, Heading, VStack} from "@chakra-ui/react";
 import BestSellerCard from "./component/best-seller-card";
 
 export default function BestSeller() {
@@ -7,8 +7,8 @@ export default function BestSeller() {
             <Heading as={"h2"} fontSize={"lg"}>Our Best Seller</Heading>
             <Grid w="100%"
                   maxW="100%"
-                  gridTemplateColumns="1fr 1fr"
-                  gridAutoRows={{base: "17em", sm: "20em"}}
+                  gridTemplateColumns={{base: "1fr 1fr", sm: "1fr 1fr 1fr", lg: "1fr 1fr 1fr 1fr"}}
+                  gridAutoRows={{base: "17em", md: "20em", lg: "22em"}}
                   alignItems="stretch"
                   gap=".5em"
                   minH={"15em"}

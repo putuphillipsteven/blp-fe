@@ -29,7 +29,7 @@ export default function LandingPage() {
                 <LandingPageNavBar toggleSideNavDisplay={toggleSideNav}/>
                 <VStack w={"full"}
                         align={"stretch"}
-                        px={{base: "0", md: "10em"}}>
+                        px={{base: ".5em", sm: "3em", md: "4em", lg: "10em"}}>
                     <Jumbotron/>
                     <OurCategories/>
                     <BestSeller/>

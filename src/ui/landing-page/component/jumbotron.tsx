@@ -1,4 +1,4 @@
-import {Box, Container, Image, useTheme} from "@chakra-ui/react";
+import {Box, Image, useTheme} from "@chakra-ui/react";
 
 export default function Jumbotron() {
     const theme = useTheme();
@@ -8,6 +8,9 @@ export default function Jumbotron() {
                 borderRadius={"1em"}
                 minH={"10em"} h={"10em"} maxH={"10em"}
                 border={`2px solid ${theme.colors.primary}`}
+                display={"flex"}
+                alignItems={"center"}
+                justifyContent={"center"}
             >
                 <Image src={"./public/ck-logo.png"}
                        objectFit='contain'

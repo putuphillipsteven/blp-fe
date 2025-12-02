@@ -23,8 +23,7 @@ export default function LandingPageNavBar({toggleSideNavDisplay}: NavBarProps) {
             alignItems={'center'}
             flexDir={{base: 'column'}}
             borderBottom={`2px solid ${theme.colors.primary}`}
-            px={{base: ".5em", md: "10em"}}
-            bgColor={{md: "red"}}
+            px={{base: ".5em", sm: "3em", md: "4em", lg: "10em"}}
         >
             <Flex
                 w={'100%'}
@@ -32,6 +31,7 @@ export default function LandingPageNavBar({toggleSideNavDisplay}: NavBarProps) {
                 justifyContent={'space-between'}
                 alignItems={'center'}
                 overflow={'visible'}
+                p={".5em"}
             >
                 {user.isLogin ? <ProfileModal/> :
                     <HStack>
