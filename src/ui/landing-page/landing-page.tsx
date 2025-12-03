@@ -35,8 +35,8 @@ export default function LandingPage() {
                     <BestSeller/>
                     <OurContacts/>
                     <OurLocation/>
-                    <LandingPageFooter/>
                 </VStack>
+                <LandingPageFooter/>
             </VStack>
         </Container>
 

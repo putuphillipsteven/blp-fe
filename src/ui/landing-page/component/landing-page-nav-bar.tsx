@@ -1,4 +1,4 @@
-import {Container, Flex, HStack, Icon, useTheme} from '@chakra-ui/react';
+import {Flex, HStack, Icon, useTheme} from '@chakra-ui/react';
 import {GiHamburgerMenu} from 'react-icons/gi';
 import SignInModal from './sign-in-modal';
 import {RootState} from '../../../utils/redux/store';
