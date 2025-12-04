@@ -1,29 +1,33 @@
 import {
-	GetTransactionFilters,
-	ITranscationInteractor,
-} from '../interfaces/i.transaction.interactor';
+    GetTransactionFilters,
+    TransactionUseCases,
+} from '../interfaces/transaction';
+import {ITransactionController} from "../interfaces/transaction";
 
-export class TransactionController {
-	private interactor: ITranscationInteractor;
-	constructor(interactor: ITranscationInteractor) {
-		this.interactor = interactor;
-	}
+export class TransactionController implements ITransactionController {
+    private interactor: TransactionUseCases;
 
-	async onCreateTransaction(filter: GetTransactionFilters) {
-		try {
-			const transaction = await this.interactor.get(filter);
-			return transaction;
-		} catch (error) {
-			throw error;
-		}
-	}
+    constructor(interactor: TransactionUseCases) {
+        this.interactor = interactor;
+    }
 
-	async onGetTransaction(filter: GetTransactionFilters) {
-		try {
-			const res = await this.interactor.get(filter);
-			return res;
-		} catch (error) {
-			throw error;
-		}
-	}
+    async create(filter: GetTransactionFilters) {
+        try {
+            const transaction = await this.interactor.get(filter);
+            return transaction;
+        } catch (error) {
+            console.error(error);
+            throw error;
+        }
+    }
+
+    async get(filter: GetTransactionFilters) {
+        try {
+            const res = await this.interactor.get(filter);
+            return res;
+        } catch (error) {
+            console.error(error);
+            throw error;
+        }
+    }
 }

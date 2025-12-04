@@ -1,6 +1,6 @@
 import {Product} from "../entities/product";
 
-export interface GetProductFilters {
+export interface GetProductFiltersProps {
     page: number,
     page_size: 10,
     sort: 'asc' | 'desc',
@@ -8,6 +8,11 @@ export interface GetProductFilters {
     product_name: string,
 }
 
+export interface GetProductReturnProps {
+    total: number;
+    data: Product[];
+}
+
 export interface ProductUseCase {
-    get(args: GetProductFilters): Promise<Product | undefined>;
+    get(args: GetProductFiltersProps): Promise<GetProductReturnProps | undefined>;
 }
