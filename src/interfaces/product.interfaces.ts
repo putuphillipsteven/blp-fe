@@ -16,3 +16,7 @@ export interface GetProductReturnProps {
 export interface ProductUseCase {
     get(args: GetProductFiltersProps): Promise<GetProductReturnProps | undefined>;
 }
+
+export interface IProductController {
+    get(args: GetProductFiltersProps): Promise<GetProductReturnProps | undefined>;
+}
