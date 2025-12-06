@@ -14,7 +14,10 @@ import {
 import { TransactionRepository } from '../../../repositories/transaction';
 import { TransactionInteractor } from '../../../interactor/transaction.interactor';
 import { TransactionController } from '../../../controller/transaction.controller';
-import { useEffect, useState } from 'react';
+import {
+
+	// useEffect,
+	useState } from 'react';
 // import Pagination from './component/pagination';
 import TotalTransactionBox from './component/total-transaction-box';
 import Pagination from './component/pagination-new';
@@ -24,7 +27,7 @@ export default function MainTransaction() {
 	const transactionController = new TransactionController(transactionInteractor);
 
 	const getTransactions = async () => {
-		const transaction = await transactionController.onGetTransaction({
+		const transaction = await transactionController.get({
 			endDate: '2024-06-30',
 			page: '1',
 			pageSize: '10',

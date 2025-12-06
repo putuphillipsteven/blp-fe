@@ -1,17 +1,22 @@
-import {FormControl, Heading, useTheme, useToast, VStack} from '@chakra-ui/react';
-import {useNavigate} from "react-router-dom";
+import {
+	FormControl,
+	Heading,
+	// useTheme,
+	// useToast,
+	VStack} from '@chakra-ui/react';
+// import {useNavigate} from "react-router-dom";
 import {useFormik} from "formik";
 import {UserFormikUtils} from "../../utils/formik/user.formik.utils";
-import {useState} from "react";
+// import {useState} from "react";
 
 export default function SignUp() {
-	const [showPassword, setShowPassword] = useState(false);
+	// const [showPassword, setShowPassword] = useState(false);
 
-	const toast = useToast();
+	// const toast = useToast();
 
-	const navigate = useNavigate();
+	// const navigate = useNavigate();
 
-	const theme = useTheme();
+	// const theme = useTheme();
 
 	const formik = useFormik({
 		validateOnChange: true,

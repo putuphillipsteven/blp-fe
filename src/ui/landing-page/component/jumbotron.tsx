@@ -1,7 +1,28 @@
+import {Product} from "../../../interfaces/product.interfaces";
 import {Box, Image, useTheme} from "@chakra-ui/react";
+import {ProductRepository} from "../../../repositories/product.repository";
+import {ProductInteractor} from "../../../interactor/product.interactor";
+import {ProductController} from "../../../controller/product.controller";
+import {useState} from "react";
+
 
 export default function Jumbotron() {
     const theme = useTheme();
+
+    const productRepository = new ProductRepository();
+    const productInteractor = new ProductInteractor(productRepository);
+    const productController = new ProductController(productInteractor);
+
+    const getProduct = async () => {
+        const product = await productController.get({
+            page: 1,
+            page_size: 5,
+            sort: "asc",
+        });
+        return product;
+    }
+
+    const [products, setProducts] = useState(<any | undefined>)(Product[]);
     return (
         <Box p={"0.5em"} id={'jumbotron-container'} minW={"100%"} maxW={"100%"}>
             <Box

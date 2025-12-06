@@ -2,10 +2,10 @@ import {Product} from "../entities/product";
 
 export interface GetProductFiltersProps {
     page: number,
-    page_size: 10,
+    page_size: number,
     sort: 'asc' | 'desc',
-    product_category_id: number,
-    product_name: string,
+    product_name?: string,
+    product_category_id?: number,
 }
 
 export interface GetProductReturnProps {
