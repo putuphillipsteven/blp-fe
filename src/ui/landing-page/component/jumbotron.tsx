@@ -1,16 +1,19 @@
-import { Product } from '../../../interfaces/product.interfaces';
+import { Product } from '../../../entities/product';
 import { Box, Image, useTheme } from '@chakra-ui/react';
 import { ProductRepository } from '../../../repositories/product.repository';
 import { ProductInteractor } from '../../../interactor/product.interactor';
 import { ProductController } from '../../../controller/product.controller';
-import { useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
+import { GetProductReturnProps } from '../../../interfaces/product.interfaces';
 
 export default function Jumbotron() {
 	const theme = useTheme();
 
-	const productRepository = new ProductRepository();
-	const productInteractor = new ProductInteractor(productRepository);
-	const productController = new ProductController(productInteractor);
+	const productController = useMemo(() => {
+		const productRepository = new ProductRepository();
+		const productInteractor = new ProductInteractor(productRepository);
+		return new ProductController(productInteractor);
+	});
 
 	const getProduct = async () => {
 		const product = await productController.get({
@@ -21,8 +24,18 @@ export default function Jumbotron() {
 		return product;
 	};
 
-	const [products, setProducts] = useState<Product[] | null>(null);
+	useEffect(() => {
+		const fetchData = async () => {
+			const product = await getProduct();
+			setProducts(product);
+		};
 
+		fetchData();
+	}, []);
+
+	const [products, setProducts] = useState<GetProductReturnProps | undefined>(null);
+
+	console.log('products: ', products);
 	return (
 		<Box p={'0.5em'} id={'jumbotron-container'} minW={'100%'} maxW={'100%'}>
 			<Box
