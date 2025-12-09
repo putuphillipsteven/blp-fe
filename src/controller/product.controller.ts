@@ -14,7 +14,7 @@ export class ProductController implements IProductController {
 	async get(args: GetProductFiltersProps) {
 		try {
 			const product = await this.interactor.get(args);
-			console.log('productController: ', product);
+			// console.log('productController: ', product);
 			return product;
 		} catch (error) {
 			console.log(error);

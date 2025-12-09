@@ -11,7 +11,7 @@ export class ProductRepository implements ProductUseCase {
 				product_name ? product_name : ''
 			}`,
 		);
-		console.log('productRepo: ', res?.data?.data);
+		// console.log('productRepo: ', res?.data?.data);
 		return res?.data?.data;
 	}
 }

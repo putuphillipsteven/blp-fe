@@ -13,7 +13,7 @@ export default function Jumbotron() {
 		const productRepository = new ProductRepository();
 		const productInteractor = new ProductInteractor(productRepository);
 		return new ProductController(productInteractor);
-	});
+	}, []);
 
 	const getProduct = async () => {
 		const product = await productController.get({
@@ -33,7 +33,7 @@ export default function Jumbotron() {
 		fetchData();
 	}, []);
 
-	const [products, setProducts] = useState<GetProductReturnProps | undefined>(null);
+	const [products, setProducts] = useState<GetProductReturnProps | null | undefined>(null);
 
 	console.log('products: ', products);
 	return (

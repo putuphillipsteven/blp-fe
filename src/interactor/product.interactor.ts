@@ -16,7 +16,7 @@ export class ProductInteractor implements ProductUseCase {
 	async get(args: GetProductFiltersProps): Promise<GetProductReturnProps | undefined> {
 		try {
 			const res = await this.repository.get(args);
-			console.log('productInteractror: ', res);
+			// console.log('productInteractror: ', res);
 			return res;
 		} catch (error) {
 			console.error(error);
